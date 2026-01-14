@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RoleCraftID Assessment</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1 id="assessment-title">RoleCraftID</h1>
+      <p id="assessment-subtitle" class="muted"></p>
+
+      <div class="meta-row">
+        <span class="pill" id="section-pill">Section</span>
+        <span class="pill" id="question-pill">Question</span>
+      </div>
+
+      <div class="progress-wrap" aria-label="Progress">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="muted" id="progress-text">0%</p>
+    </header>
+
+    <section id="card" class="card" aria-live="polite"></section>
+
+    <section id="resultsPage" class="card" style="display:none;">
+      <h2 style="margin:0 0 10px;">Your RoleCraftID Results</h2>
+
+      <div id="resultsHeadline" class="headline"></div>
+      <div id="resultsLinks" class="muted" style="margin-top:8px;"></div>
+
+      <div id="resultsBox" class="results results-simple" style="margin-top:12px;"></div>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="restartResults" class="btn btn-secondary" type="button">Restart test</button>
+      </div>
+
+      <hr class="sep" />
+
+      <h3>Email me my results</h3>
+      <p class="muted">Optional. You’ll also see your results on-screen above.</p>
+
+      <label class="label">
+        Email address
+        <input id="emailInput" class="input" type="email" placeholder="you@example.com" autocomplete="email" />
+      </label>
+
+      <div class="row">
+        <button id="sendEmail" class="btn btn-primary" type="button">Send email</button>
+      </div>
+
+      <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
+    </section>
+
+
+    <footer id="nav" class="footer">
+      <button id="prev" class="btn btn-secondary" type="button">Back</button>
+      <button id="next" class="btn btn-primary" type="button">Next</button>
+    </footer>
+  </main>
+
+<!-- EmailJS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script type="module" src="./questions.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
