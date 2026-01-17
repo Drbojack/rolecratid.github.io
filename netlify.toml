@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+
+[[plugins]]
+  package = "@netlify/plugin-emails"
+
+# Set these in Netlify UI > Site settings > Environment variables:
+# NETLIFY_EMAILS_PROVIDER=sendgrid
+# NETLIFY_EMAILS_PROVIDER_API_KEY=YOUR_SENDGRID_API_KEY
+# NETLIFY_EMAILS_SECRET=LONG_RANDOM_STRING

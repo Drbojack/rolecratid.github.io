@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your RoleCraftID Results</title>
+  </head>
+
+  <body style="margin:0;padding:0;background:#ffffff;font-family:'Source Sans 3',Arial,sans-serif;color:#111827;">
+    <div style="max-width:680px;margin:0 auto;padding:32px 22px;">
+
+      <div style="margin-bottom:18px;">
+        <a href="https://www.rolecraftid.com" style="text-decoration:none;color:#111827;font-weight:800;font-size:18px;letter-spacing:.2px;">
+          RoleCraftID
+        </a>
+      </div>
+
+      <h2 style="margin:0 0 10px;font-size:22px;line-height:1.3;">Hello {{firstName}},</h2>
+
+      <p style="margin:0 0 14px;line-height:1.65;">
+        Thank you for completing the RoleCraft ID personality test. Based on your responses, your RoleCraft Identity (RCID) is:
+      </p>
+
+      <p style="margin:0 0 18px;line-height:1.65;font-size:18px;">
+        <strong>
+          <a href="{{primaryRoleUrl}}" style="color:#111827;text-decoration:underline;">{{primaryRole}}</a>
+          /
+          <a href="{{secondaryCraftUrl}}" style="color:#111827;text-decoration:underline;">{{secondaryCraft}}</a>
+        </strong>
+      </p>
+
+      <p style="margin:0 0 18px;line-height:1.65;color:#4b5563;">
+        This reflects how you are intrinsically motivated to contribute and how that contribution tends to show up in action.
+        Below is a brief overview of each part of your profile, with links if you’d like to explore further.
+      </p>
+
+      <hr style="border:none;border-top:1px solid rgba(17,24,39,.12);margin:18px 0;" />
+
+      <!-- Primary Role -->
+      <h3 style="margin:0 0 8px;font-size:18px;">Your Primary Role: <a href="{{primaryRoleUrl}}" style="color:#111827;text-decoration:underline;">{{primaryRole}}</a></h3>
+
+      <p style="margin:0 0 10px;line-height:1.65;">
+        Your Primary Role represents your core intrinsic contribution pattern.
+      </p>
+
+      <p style="margin:0 0 14px;line-height:1.65;color:#4b5563;">
+        People who express the <strong>{{primaryRole}}</strong> strongly are often recognized for the way they consistently influence outcomes,
+        especially under pressure or ambiguity.
+      </p>
+
+      {{#if primaryRoleBullets}}
+      <ul style="margin:0 0 14px;padding-left:18px;line-height:1.65;">
+        {{#each primaryRoleBullets}}
+          <li style="margin:6px 0;">{{this}}</li>
+        {{/each}}
+      </ul>
+      {{/if}}
+
+      <p style="margin:0 0 8px;line-height:1.65;"><strong>Here is how you scored across all Roles:</strong></p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;margin:0 0 14px;">
+        <tbody>
+          {{#each roleScores}}
+            <tr>
+              <td style="padding:6px 0;line-height:1.4;">
+                <a href="{{url}}" style="color:#111827;text-decoration:underline;">{{name}}</a>
+              </td>
+              <td style="padding:6px 0;text-align:right;white-space:nowrap;line-height:1.4;">
+                <strong>{{score}}/10</strong>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <p style="margin:0 0 18px;line-height:1.65;">
+        Learn more about the <a href="{{primaryRoleUrl}}" style="color:#111827;text-decoration:underline;">{{primaryRole}}</a>.
+      </p>
+
+      <hr style="border:none;border-top:1px solid rgba(17,24,39,.12);margin:18px 0;" />
+
+      <!-- Secondary Craft -->
+      <h3 style="margin:0 0 8px;font-size:18px;">Your Secondary Craft: <a href="{{secondaryCraftUrl}}" style="color:#111827;text-decoration:underline;">{{secondaryCraft}}</a></h3>
+
+      <p style="margin:0 0 10px;line-height:1.65;">
+        Your Craft describes how your Role tends to express itself in practice.
+      </p>
+
+      <p style="margin:0 0 14px;line-height:1.65;color:#4b5563;">
+        The <strong>{{secondaryCraft}}</strong> Craft shapes your default way of acting, responding, and engaging once something matters to you.
+      </p>
+
+      {{#if secondaryCraftBullets}}
+      <ul style="margin:0 0 14px;padding-left:18px;line-height:1.65;">
+        {{#each secondaryCraftBullets}}
+          <li style="margin:6px 0;">{{this}}</li>
+        {{/each}}
+      </ul>
+      {{/if}}
+
+      <p style="margin:0 0 8px;line-height:1.65;"><strong>Here is how you scored across all Crafts:</strong></p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;margin:0 0 14px;">
+        <tbody>
+          {{#each craftScores}}
+            <tr>
+              <td style="padding:6px 0;line-height:1.4;">
+                <a href="{{url}}" style="color:#111827;text-decoration:underline;">{{name}}</a>
+              </td>
+              <td style="padding:6px 0;text-align:right;white-space:nowrap;line-height:1.4;">
+                <strong>{{score}}/10</strong>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <p style="margin:0 0 18px;line-height:1.65;">
+        Explore the <a href="{{secondaryCraftUrl}}" style="color:#111827;text-decoration:underline;">{{secondaryCraft}}</a> Craft.
+      </p>
+
+      <hr style="border:none;border-top:1px solid rgba(17,24,39,.12);margin:18px 0;" />
+
+      <!-- SDT -->
+      <h3 style="margin:0 0 8px;font-size:18px;">Your Self-Determination Priorities (SDP)</h3>
+
+      <p style="margin:0 0 12px;line-height:1.65;color:#4b5563;">
+        Your motivation is sustained by a specific mix of psychological drivers. Based on your assessment, your priorities rank as follows:
+      </p>
+
+      <ol style="margin:0 0 12px;padding-left:18px;line-height:1.65;">
+        {{#each sdtPriorities}}
+          <li style="margin:6px 0;">
+            <a href="{{url}}" style="color:#111827;text-decoration:underline;">{{name}}</a>
+          </li>
+        {{/each}}
+      </ol>
+
+      <p style="margin:0 0 18px;line-height:1.65;color:#4b5563;">
+        These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
+      </p>
+
+      <p style="margin:0 0 18px;line-height:1.65;">
+        Learn more about your SDP profile:
+        <a href="{{sdtOverviewUrl}}" style="color:#111827;text-decoration:underline;">SDT overview</a>
+      </p>
+
+      <hr style="border:none;border-top:1px solid rgba(17,24,39,.12);margin:18px 0;" />
+
+      <!-- Next steps -->
+      <h3 style="margin:0 0 8px;font-size:18px;">What to Do Next</h3>
+
+      <p style="margin:0 0 12px;line-height:1.65;color:#4b5563;">
+        Your RoleCraftID is not a label or limitation. It’s a tool for awareness and choice—one that becomes more useful as you apply it to real decisions, roles, and challenges.
+      </p>
+
+      <p style="margin:0 0 12px;line-height:1.65;color:#4b5563;">
+        On the RoleCraft site, you’ll find deeper explanations of Roles and Crafts, examples from real and fictional profiles, and campaigns and scenarios where your RCID can be applied.
+      </p>
+
+      <p style="margin:0 0 18px;line-height:1.65;">
+        Continue exploring your RoleCraftID:
+        <a href="{{rcidOverviewUrl}}" style="color:#111827;text-decoration:underline;">RCID overview</a>
+      </p>
+
+      <p style="margin:0 0 18px;line-height:1.65;">
+        Thank you for taking the assessment. We’re glad you’re here.
+      </p>
+
+      <p style="margin:0 0 4px;line-height:1.65;"><strong>The RoleCraftID Team</strong></p>
+      <p style="margin:0 0 18px;line-height:1.65;">
+        <a href="https://www.rolecraftid.com" style="color:#111827;text-decoration:underline;">RoleCraftID.com</a>
+      </p>
+
+      <p style="margin:0;line-height:1.65;color:#4b5563;font-size:14px;">
+        P.S. Feel free to share this with your friends and colleagues.
+      </p>
+
+    </div>
+  </body>
+</html>
