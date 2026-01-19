@@ -220,7 +220,7 @@ function bindInputs(cardEl){
 
 function renderStart(){
   const { total } = progress();
-  const restartBtn = el('restart');
+  const restartBtn = el('restartAlways');
   if (restartBtn) restartBtn.style.display = 'none';
   el('progress-bar').style.width = '0%';
   el('progress-text').textContent = '';
@@ -278,7 +278,7 @@ function render(){
   el('assessment-title').textContent = config.title;
   el('assessment-subtitle').textContent = config.subtitle || '';
 // 🔁 Restart button visibility (THIS is the spot)
-  const restartBtn = el('restart');
+  const restartBtn = el('restartAlways');
   if (restartBtn) {
     restartBtn.style.display = state.started ? 'inline-flex' : 'none';
   }
