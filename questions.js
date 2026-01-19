@@ -31,13 +31,13 @@ export const config = {
       "Trainer": "https://www.rolecraftid.com/trainer"
     },
     sdt: {
-      "Freedom / Autonomy": "https://www.rolecraftid.com/freedom",
-      "Mastery / Competence": "https://www.rolecraftid.com/mastery",
-      "Meaning / Relatedness": "https://www.rolecraftid.com/meaning"
+      "Freedom / Autonomy": "https://www.rolecraftid.com/sdt",
+      "Mastery / Competence": "https://www.rolecraftid.com/sdt",
+      "Meaning / Relatedness": "https://www.rolecraftid.com/sdt"
     },
     overview: {
-      rcid: "https://www.rolecraftid.com/results-overview",
-      sdt: "https://www.rolecraftid.com/results-overview",
+      rcid: "https://www.rolecraftid.com/test-results",
+      sdt: "https://www.rolecraftid.com/sdt",
       contact: "https://www.rolecraftid.com/contact"
     }
   },
