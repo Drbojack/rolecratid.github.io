@@ -164,29 +164,23 @@ html, body{
   overflow:visible !important;
 }
 
-/* Force button styling everywhere */
-button.btn{
-  appearance:none;
-  -webkit-appearance:none;
-  font-family:var(--font-body);
-  border:1px solid var(--border);
-  border-radius:999px;
-  padding:12px 18px;
-  font-weight:700;
-  font-size:15px;
-  cursor:pointer;
-  background:rgba(17,24,39,.05);
-  color:var(--text);
+button.btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: var(--font-body);
 }
-
-button.btn.btn-primary{
+button.btn.btn-primary {
   background: linear-gradient(90deg,var(--primary),var(--primary2));
-  border:none;
-  color:#fff;
+  border: none;
+  color: white;
 }
-
-button.btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
+button.btn.btn-secondary {
+  background: rgba(17,24,39,.05);
+  color: var(--text);
 }
-
