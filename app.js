@@ -277,6 +277,9 @@ function render(){
   // header is hidden via CSS, but keep populated for accessibility
   el('assessment-title').textContent = config.title;
   el('assessment-subtitle').textContent = config.subtitle || '';
+	const nav = el('nav');
+if (nav) nav.style.display = state.started ? 'flex' : 'none';
+
 // 🔁 Restart button visibility (THIS is the spot)
   const restartBtn = el('restartAlways');
   if (restartBtn) {
