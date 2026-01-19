@@ -277,7 +277,11 @@ function render(){
   // header is hidden via CSS, but keep populated for accessibility
   el('assessment-title').textContent = config.title;
   el('assessment-subtitle').textContent = config.subtitle || '';
-
+// 🔁 Restart button visibility (THIS is the spot)
+  const restartBtn = el('restart');
+  if (restartBtn) {
+    restartBtn.style.display = state.started ? 'inline-flex' : 'none';
+  }
   if (!state.started){
     return renderStart();
   }
@@ -302,11 +306,7 @@ function render(){
     : renderForcedQuestion(q);
 
   bindInputs(el('card'));
-	// 🔁 Restart button visibility (THIS is the spot)
-  const restartBtn = el('restart');
-  if (restartBtn) {
-    restartBtn.style.display = state.started ? 'inline-flex' : 'none';
-  }
+	
 }
 
 /* ---------------- Results helpers ---------------- */
