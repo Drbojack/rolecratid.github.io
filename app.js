@@ -246,7 +246,7 @@ function renderStart(){
 
       <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
         <button id="startBtn" class="btn btn-primary" type="button">${hasProgress ? "Resume" : "Begin"}</button>
-        ${hasProgress ? `<button id="restartBtn" class="btn" type="button">Start over</button>` : ``}
+        ${hasProgress ? `<button id="restartBtn" class="btn btn-secondary" type="button">Start over</button>` : ``}
       </div>
     </div>
   `;
