@@ -212,9 +212,11 @@ function bindInputs(cardEl){
           // last page -> results
           showResults();
         }
-      }, 120);
+          }, 120);
     });
+  });
 }
+
 
 function renderStart(){
   const { total } = progress();
