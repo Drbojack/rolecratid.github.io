@@ -220,7 +220,8 @@ function bindInputs(cardEl){
 
 function renderStart(){
   const { total } = progress();
-
+  const restartBtn = el('restart');
+  if (restartBtn) restartBtn.style.display = 'none';
   el('progress-bar').style.width = '0%';
   el('progress-text').textContent = '';
   el('prev').disabled = true;
