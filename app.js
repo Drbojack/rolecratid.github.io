@@ -526,7 +526,12 @@ el('next').addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     return;
   }
+const restartBtn = el('restart');
+if (restartBtn) {
+  restartBtn.onclick = restart;
+}
 
+	
   const isLast = state.pageIdx === state.pages.length - 1;
   if (!isLast){
     state.pageIdx += 1;
