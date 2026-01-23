@@ -194,14 +194,34 @@ function bindInputs(cardEl){
       }
 
       saveState(state);
+      // Re-render to show selection, then auto-advance (boss request: no Next button)
+      const currentIdx = state.pageIdx;
       render();
+      // Small delay so the user sees their selection register
+      setTimeout(() => {
+        // If the user already navigated (e.g., clicked Back fast), don't advance.
+        if (state.pageIdx !== currentIdx) return;
+        const p = state.pages[state.pageIdx];
+        if (!isPageAnswered(p)) return;
+        if (state.pageIdx < state.pages.length - 1) {
+          state.pageIdx += 1;
+          saveState(state);
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          // last page -> results
+          showResults();
+        }
+          }, 120);
     });
   });
 }
 
+
 function renderStart(){
   const { total } = progress();
-
+  const restartBtn = el('restartAlways');
+  if (restartBtn) restartBtn.style.display = 'none';
   el('progress-bar').style.width = '0%';
   el('progress-text').textContent = '';
   el('prev').disabled = true;
@@ -226,7 +246,7 @@ function renderStart(){
 
       <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
         <button id="startBtn" class="btn btn-primary" type="button">${hasProgress ? "Resume" : "Begin"}</button>
-        ${hasProgress ? `<button id="restartBtn" class="btn" type="button">Start over</button>` : ``}
+        ${hasProgress ? `<button id="restartBtn" class="btn btn-secondary" type="button">Start over</button>` : ``}
       </div>
     </div>
   `;
@@ -257,7 +277,14 @@ function render(){
   // header is hidden via CSS, but keep populated for accessibility
   el('assessment-title').textContent = config.title;
   el('assessment-subtitle').textContent = config.subtitle || '';
+	const nav = el('nav');
+if (nav) nav.style.display = state.started ? 'flex' : 'none';
 
+// 🔁 Restart button visibility (THIS is the spot)
+  const restartBtn = el('restartAlways');
+  if (restartBtn) {
+    restartBtn.style.display = state.started ? 'inline-flex' : 'none';
+  }
   if (!state.started){
     return renderStart();
   }
@@ -282,6 +309,7 @@ function render(){
     : renderForcedQuestion(q);
 
   bindInputs(el('card'));
+	
 }
 
 /* ---------------- Results helpers ---------------- */
@@ -317,31 +345,25 @@ function linkFor(group, name){
   return "#";
 }
 
-/** EMAIL (Netlify Function -> Netlify Emails / SendGrid) **/
+/** EMAIL (EmailJS) **/
 function setupEmail(){
-  // If your HTML doesn't include the email UI on the results page, bail gracefully.
-  const sendBtn = el('sendEmail');
-  const emailInput = el('emailInput');
-  const statusEl = el('emailStatus');
-  if (!sendBtn || !emailInput || !statusEl) return;
+  // Email is sent via the Netlify Function at /.netlify/functions/send-results
+  // (API keys live in Netlify environment variables / Email Integration, not in this file).
+  el('sendEmail').disabled = false;
+  el('emailStatus').textContent = "";
 
-  // Enable by default; function will return an error if not configured on Netlify.
-  sendBtn.disabled = false;
-  statusEl.textContent = "";
-
-  sendBtn.addEventListener('click', async () => {
-    const email = emailInput.value.trim();
+  el('sendEmail').addEventListener('click', async () => {
+    const email = el('emailInput').value.trim();
     if (!email){
-      statusEl.textContent = "Please enter an email address.";
+      el('emailStatus').textContent = "Please enter an email address.";
       return;
     }
 
-    sendBtn.disabled = true;
-    statusEl.textContent = "Sending…";
+    el('sendEmail').disabled = true;
+    el('emailStatus').textContent = "Sending…";
 
     try{
-      const payload = JSON.parse(el('resultsBox')?.dataset?.payload || "{}");
-
+      const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
       const res = await fetch("/.netlify/functions/send-results", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -349,11 +371,8 @@ function setupEmail(){
           email,
           primaryRole: (payload.primaryRoles || []).join(" & "),
           secondaryCraft: (payload.secondaryCrafts || []).join(" & "),
-          resultsHtml: el('resultsBox') ? el('resultsBox').innerHTML : "",
-          contactUrl: (config.urls?.overview?.contact) ? config.urls.overview.contact : "https://www.rolecraftid.com/contact",
-          roleScores: payload.roleScores || null,
-          craftScores: payload.craftScores || null,
-          sdtPriorities: payload.sdtPriorities || null
+          resultsHtml: el('resultsBox').innerHTML,
+          contactUrl: (config.urls.overview && config.urls.overview.contact) ? config.urls.overview.contact : "https://www.rolecraftid.com/contact"
         })
       });
 
@@ -362,16 +381,19 @@ function setupEmail(){
         throw new Error(txt || "Send failed");
       }
 
-      statusEl.textContent = "Sent! Check your inbox (and spam folder just in case).";
+      el('emailStatus').textContent = "Sent! Check your inbox (and spam folder just in case).";
     } catch (err){
       console.error(err);
-      statusEl.textContent = "Couldn’t send email. Please try again.";
+      el('emailStatus').textContent = "Couldn’t send email. Please try again.";
     } finally {
-      sendBtn.disabled = false;
+      el('sendEmail').disabled = false;
     }
-  });
+	  });
 }
 
+function showResults(){
+  state.completed = true;
+  saveState(state);
 function showResults(){
   computeTotals();
 
@@ -427,12 +449,6 @@ function showResults(){
     `Primary Role: ${primaryRole} (${primaryRoles.map(r => linkFor('roles', r)).join(', ')})`,
     `Secondary Craft: ${secondaryCraft} (${secondaryCrafts.map(c => linkFor('crafts', c)).join(', ')})`,
   ].join('\\n');
-
-
-  // Structured arrays for emails (every name already has a URL via linkFor)
-  const roleScores = rankKeys(roles10).map(r => ({ name: r.key, score: r.score, url: linkFor('roles', r.key) }));
-  const craftScoresArr = rankKeys(crafts10).map(r => ({ name: r.key, score: r.score, url: linkFor('crafts', r.key) }));
-  const sdtPriorities = sdtRank.map(r => ({ name: r.key, score: r.score, url: linkFor('sdt', r.key) }));
 
   // On-screen page formatted like the provided "Results Screen" doc
   el('resultsBox').innerHTML = `
@@ -497,10 +513,7 @@ function showResults(){
     secondaryCrafts,
     sdtRank,
     resultsText,
-    resultsLinks,
-    roleScores,
-    craftScores: craftScoresArr,
-    sdtPriorities
+    resultsLinks
   });
 
   el('card').style.display = "none";
@@ -525,7 +538,12 @@ el('next').addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     return;
   }
+const restartBtn = el('restart');
+if (restartBtn) {
+  restartBtn.onclick = restart;
+}
 
+	
   const isLast = state.pageIdx === state.pages.length - 1;
   if (!isLast){
     state.pageIdx += 1;
@@ -549,6 +567,27 @@ if (restartBtn){
     state.answers = new Map();
     saveState(state);
     // hide results and show intro
+    el('resultsPage').style.display = "none";
+    el('card').style.display = "block";
+    if (el('nav')) el('nav').style.display = "block";
+    renderStart();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+// Always-visible restart (header/footer)
+const restartAlwaysBtn = document.getElementById('restartAlways');
+if (restartAlwaysBtn){
+  restartAlwaysBtn.addEventListener('click', () => {
+    clearSaved();
+    state.started = false;
+    state.pageIdx = 0;
+    state.seed = Math.floor(Math.random() * 2**31);
+    state.pages = buildPages(state.seed);
+    state.answers = new Map();
+    saveState(state);
+
+    // If currently on results screen, switch back
     el('resultsPage').style.display = "none";
     el('card').style.display = "block";
     if (el('nav')) el('nav').style.display = "block";
