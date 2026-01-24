@@ -228,94 +228,125 @@ button.btn.btn-secondary {
 
 
 /* ===============================
-   Results layout (JS untouched)
+   Results layout (clean + scoped)
    =============================== */
 
-.results-page{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px 48px;
+/* Hide results by default */
+#resultsPage {
+  display: none;
 }
 
-/* two-column layout like rolecraftid.com */
-.results-layout{
+/* Show results when active */
+body.show-results #resultsPage {
+  display: block;
+}
+
+/* When results are shown, neutralize the card shell */
+body.show-results .card {
+  max-width: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: visible;
+}
+
+/* Constrain results content (acts like a page container) */
+.results-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+/* Two-column layout (matches rolecraftid.com feel) */
+.results-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 48px;
   align-items: flex-start;
 }
 
-/* left column */
-.results-left{
+/* Left column (image) */
+.results-left {
   display: flex;
   justify-content: center;
 }
 
-.results-visual{
+.results-visual {
   width: 100%;
   max-width: 260px;
   min-height: 260px;
   border-radius: 18px;
-  background: rgba(17,24,39,.04);
+  background: rgba(17, 24, 39, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* right column typography */
-.results-right h2{
+.results-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+
+/* Right column typography */
+.results-right h2 {
   font-size: 32px;
   margin: 0 0 12px;
   line-height: 1.2;
 }
 
-.results-headline{
+.results-headline {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.results-links{
+.results-links {
   color: var(--muted);
   margin-bottom: 18px;
 }
 
-.results-body{
+.results-body {
   font-size: 16px;
   line-height: 1.7;
 }
 
-/* mobile */
-@media (max-width: 900px){
-  .results-layout{
+/* Mobile layout */
+@media (max-width: 900px) {
+  .results-layout {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .results-left{
+
+  .results-left {
     justify-content: flex-start;
   }
 }
 
+/* ===============================
+   Scroll behavior (single scrollbar)
+   =============================== */
 
-/* DEFINITIVE single-scroll fix */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+body.show-results {
   overflow-y: auto;
 }
 
-#resultsPage,
-.results-layout,
-.results-left,
-.results-right,
-.card,
-.dialog-inner {
-  overflow: visible !important;
-  max-height: none !important;
-}
+/* ===============================
+   Fade animation (questions only)
+   =============================== */
 
-/* Fade animation */
 .card {
   transition: opacity 0.2s ease;
 }
+
 .card.is-fading {
   opacity: 0;
 }
