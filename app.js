@@ -445,7 +445,7 @@ function setupEmail(){
 	  });
 }
 
-function showResults(){
+function showResults() {
   computeTotals();
 
   const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
@@ -454,23 +454,28 @@ function showResults(){
 
   const primaryRoles = topKeys(roles10).keys;
 
-// Render primary role image (if available)
-const visualEl = document.querySelector('.results-visual');
-if (visualEl && primaryRoles.length){
-  // Normalize role label (e.g. "Learned Teacher" -> "Teacher")
-  const normalizedRole = primaryRoles[0]
-    .replace(/^Learned\s+/i, '')
-    .replace(/^Insightful\s+/i, '')
-    .replace(/^Organized\s+/i, '')
-    .replace(/^Visionary\s+/i, '')
-    .replace(/^Trusted\s+/i, '')
-    .replace(/^Mindful\s+/i, '')
-    .trim();
+  // ======================================================
+  // Render primary role image (THIS IS THE ONLY BLOCK YOU NEED)
+  // ======================================================
 
-  const img = ROLE_IMAGES[normalizedRole];
-  visualEl.innerHTML = img
-    ? `<img src="${img}" alt="${normalizedRole} role icon" />`
-    : "";
+  const visualEl = document.querySelector('.results-visual');
+
+  if (visualEl && primaryRoles.length) {
+    // "Learned Teacher" → "Teacher"
+    const roleLabel = primaryRoles[0];
+    const baseRole = roleLabel.split(' ').slice(-1)[0];
+
+    const imgPath = ROLE_IMAGES[baseRole];
+
+    visualEl.innerHTML = imgPath
+      ? `<img src="${imgPath}" alt="${baseRole} role icon">`
+      : '';
+  }
+
+  // ------------------------------------------------------
+  // rest of your existing result rendering continues here
+  // (do not move this image block below DOM updates)
+  // ------------------------------------------------------
 }
 
   const secondaryCrafts = topKeys(crafts10).keys;
