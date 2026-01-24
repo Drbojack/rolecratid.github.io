@@ -141,14 +141,25 @@ a{color: inherit}
 .results-simple li{margin:6px 0;}
 .results-simple a{text-decoration:underline;}
 
-/* Make the results page feel tighter/cleaner on mobile */
+/* --- Results page spacing (mobile-friendly) --- */
+.results-content{max-width: 720px; margin: 0 auto;}
+.results-content h3{margin:18px 0 8px; font-size:18px;}
+.results-content p{margin:10px 0; line-height:1.6;}
+.results-content .results-lead{margin-top:0; font-weight:600; color:var(--text);}
+.results-content .results-rcid{margin:6px 0 0;}
+.results-content .muted{color:var(--muted);}
+.results-list{margin:8px 0 0; padding-left:18px;}
+.results-list li{margin:6px 0;}
+
+/* Tighter card padding on small screens so it doesn't look "indented" */
 @media (max-width: 640px){
-  .container{margin: 18px auto; padding: 18px 14px 28px;}
-  .card{margin-top: 14px; padding: 18px 16px;}
-  .q-subtitle{font-size: 22px;}
-  .results-simple p{margin: 6px 0;}
-  .results-simple ul{margin-top: 6px;}
+  .container{margin: 12px auto; padding: 14px 12px 24px;}
+  .card{padding: 18px 16px;}
+  #resultsPage .card{padding: 18px 16px;}
+  .results-content{max-width: 100%;}
+  .results-list{padding-left:16px;}
 }
+
 
 /* v8: show progress, hide title/meta */
 .header{display:block; margin-bottom:14px;}
@@ -160,19 +171,6 @@ a{color: inherit}
 /* results page */
 #resultsPage{padding-top:18px;}
 
-/* Mobile tightening (results page spacing + overall padding) */
-@media (max-width: 640px){
-  .container{margin: 24px auto; padding: 18px 14px 32px;}
-  .card{padding: 20px 18px;}
-  .q-title{font-size: 24px;}
-  .q-subtitle{font-size: 22px;}
-  .footer{margin-top:10px;}
-
-  /* Results: reduce large white gaps */
-  .results-simple h3{margin:10px 0 6px;}
-  .results-simple p{margin:6px 0;}
-  .results-simple ul{margin:6px 0 0;}
-}
 
 /* no-internal-scroll */
 html, body{
@@ -206,4 +204,91 @@ button.btn.btn-primary {
 button.btn.btn-secondary {
   background: rgba(17,24,39,.05);
   color: var(--text);
+}
+
+
+/* v14: results page spacing + mobile cleanup (modeled after rolecraftid.com/prophet style) */
+#resultsPage.card{padding: 24px 26px;}
+#resultsPage .results-simple{max-width: 720px; margin: 0 auto;}
+#resultsPage h2{margin: 0 0 10px; font-size: 28px; line-height:1.2;}
+#resultsPage p{margin: 10px 0; line-height:1.65;}
+#resultsPage .results-list{margin: 10px 0 0; padding-left: 18px;}
+#resultsPage .results-list li{margin: 6px 0;}
+#resultsPage .sep{margin: 12px 0;}
+#resultsPage a{text-decoration: underline;}
+
+/* tighten on mobile */
+@media (max-width: 520px){
+  .container{margin: 12px auto; padding: 18px 14px 40px;}
+  .card{padding: 20px 18px;}
+  #resultsPage.card{padding: 18px 16px;}
+  #resultsPage h2{font-size: 22px;}
+  #resultsPage .results-list{padding-left: 14px;}
+}
+
+
+/* ===============================
+   Results layout (JS untouched)
+   =============================== */
+
+.results-page{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+/* two-column layout like rolecraftid.com */
+.results-layout{
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+/* left column */
+.results-left{
+  display: flex;
+  justify-content: center;
+}
+
+.results-visual{
+  width: 100%;
+  max-width: 260px;
+  min-height: 260px;
+  border-radius: 18px;
+  background: rgba(17,24,39,.04);
+}
+
+/* right column typography */
+.results-right h2{
+  font-size: 32px;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.results-headline{
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.results-links{
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.results-body{
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* mobile */
+@media (max-width: 900px){
+  .results-layout{
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .results-left{
+    justify-content: flex-start;
+  }
 }
