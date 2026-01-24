@@ -1,3 +1,7 @@
+
+// This is a reattached copy of app.fixed.js
+// (Content restored verbatim from the previous fixed version)
+
 import { config, banks } from './questions.js';
 
 const el = (id) => document.getElementById(id);
@@ -358,11 +362,17 @@ if (nav) nav.style.display = state.started ? 'flex' : 'none';
   el('next').textContent = (state.pageIdx === state.pages.length - 1) ? 'Finish' : 'Next';
   el('next').disabled = !isPageAnswered(page);
 
-  el('card').innerHTML = (page.type === "likert")
+  const cardEl = el('card');
+  cardEl.classList.add('is-fading');
+
+  setTimeout(() => {
+    cardEl.innerHTML = (page.type === "likert")
     ? renderLikertQuestion(q)
     : renderForcedQuestion(q);
 
-  bindInputs(el('card'));
+    cardEl.classList.remove('is-fading');
+    bindInputs(cardEl);
+  }, 120);
 	
 }
 
@@ -445,55 +455,6 @@ function setupEmail(){
 	  });
 }
 
-function showResults() {
-  computeTotals();
-
-  const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
-  const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
-  const sdt10 = toOutOf10(state.totals.sdt, config.maxPoints.sdt);
-
-  const primaryRoles = topKeys(roles10).keys;
-  const secondaryCrafts = topKeys(crafts10).keys;
-
-  // --- Render main results layout FIRST ---
-  el('resultsBox').innerHTML = `
-    <div class="results-layout">
-      <div class="results-left">
-        <div class="results-visual"></div>
-      </div>
-      <div class="results-right">
-        <h2>Your RoleCraftID Results</h2>
-        <div class="results-headline">
-          ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
-        </div>
-        <div class="results-links">
-          Primary: ${primaryRoles.join(' & ')} · Secondary: ${secondaryCrafts.join(' & ')}
-        </div>
-      </div>
-    </div>
-  `;
-
-  // --- Inject role image AFTER layout exists ---
-  const visualEl = document.querySelector('.results-visual');
-  if (visualEl && primaryRoles.length) {
-    const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
-    const imgPath = ROLE_IMAGES[baseRole];
-    if (imgPath) {
-      visualEl.innerHTML = `<img src="${imgPath}" alt="${baseRole} role icon" />`;
-    }
-  }
-
-  el('card').style.display = "none";
-  if (el('nav')) el('nav').style.display = "none";
-  el('resultsPage').style.display = "block";
-
-  state.completed = true;
-  state.completedAt = Date.now();
-  state.started = false;
-  saveState(state);
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
   const secondaryCrafts = topKeys(crafts10).keys;
   const sdtRank = rankKeys(sdt10);
@@ -620,6 +581,59 @@ function showResults() {
   state.started = false;
   saveState(state);
 }
+
+
+function showResults() {
+  computeTotals();
+
+  const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
+  const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
+  const sdt10 = toOutOf10(state.totals.sdt, config.maxPoints.sdt);
+
+  const primaryRoles = topKeys(roles10).keys;
+  const secondaryCrafts = topKeys(crafts10).keys;
+  const sdtRank = rankKeys(sdt10);
+
+  // Build results HTML FIRST
+  el('resultsBox').innerHTML = `
+    <div class="results-layout">
+      <div class="results-left">
+        <div class="results-visual"></div>
+      </div>
+      <div class="results-right">
+        <h2>Your RoleCraftID Results</h2>
+        <div class="results-headline">
+          ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
+        </div>
+        <div class="results-links">
+          Primary: ${primaryRoles.join(' & ')} · Secondary: ${secondaryCrafts.join(' & ')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Inject role image AFTER layout exists
+  const visualEl = document.querySelector('.results-visual');
+  if (visualEl && primaryRoles.length) {
+    const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
+    const imgPath = ROLE_IMAGES[baseRole];
+    if (imgPath) {
+      visualEl.innerHTML = `<img src="${imgPath}" alt="${baseRole} role icon">`;
+    }
+  }
+
+  el('card').style.display = "none";
+  if (el('nav')) el('nav').style.display = "none";
+  el('resultsPage').style.display = "block";
+
+  state.completed = true;
+  state.completedAt = Date.now();
+  state.started = false;
+  saveState(state);
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 
 el('prev').addEventListener('click', () => {
   if (!state.started) return;
