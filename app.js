@@ -4,13 +4,13 @@ const el = (id) => document.getElementById(id);
 
 // Role → image mapping (results page)
 const ROLE_IMAGES = {
-  "Prophet": "/images/prophet.png",
-  "Teacher": "/images/teacher.png",
-  "Exhorter": "/images/exhorter.png",
-  "Servant": "/images/servant.png",
-  "Steward": "/images/steward.png",
-  "Leader": "/images/leader.png",
-  "Mercy": "/images/mercy.png"
+  "Prophet": "images/prophet.png",
+  "Teacher": "images/teacher.png",
+  "Exhorter": "images/exhorter.png",
+  "Servant": "images/servant.png",
+  "Steward": "images/steward.png",
+  "Leader": "images/leader.png",
+  "Mercy": "images/mercy.png"
 };
 
 
