@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;800&display=swap");
+/* Squarespace-friendly embed styling */
+:root{
+  --bg: transparent;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#4b5563;
+  --border:rgba(17,24,39,.14);
+  --shadow: 0 14px 34px rgba(17,24,39,.10);
+  --radius:18px;
+
+  /* Brand-ish accents (tweak as needed) */
+  --primary:#2563eb;
+  --primary2:#1d4ed8;
+
+  /* Typography */
+  --font-body: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --font-hand: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+
+body{margin:0; font-family:var(--font-body); background:var(--bg); color:var(--text);}
+
+.container{max-width: 1080px; margin: 2vh auto; padding: 28px 24px 50px;}
+.header h1{margin:0 0 8px; font-family:var(--font-body); font-size:46px; letter-spacing:-.01em; font-weight:700; color:var(--text);}
+.muted{color:var(--muted); margin:0}
+
+.meta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+.pill{display:inline-flex; align-items:center; gap:8px; padding: 7px 12px; border-radius: 999px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.05);
+  font-size: 13px; color: var(--muted);
+}
+
+.progress-wrap{margin-top:12px; width:100%; height:10px; background: rgba(255,255,255,.08); border-radius: 999px; overflow:hidden;}
+.progress-bar{height:100%; width:0%; background: linear-gradient(90deg,var(--primary),var(--primary2));}
+
+.card{margin-top: 26px; background: var(--card); border: 1px solid var(--border); box-shadow: var(--shadow); border-radius: var(--radius); padding: 34px 36px;}
+.q-title{font-family:var(--font-body); font-size:34px; margin:0 0 14px; line-height:1.25;}
+.q-help{margin:0 0 18px; font-size:16px}
+
+.options{display:grid; gap:10px; margin-top:10px}
+.option{
+  display:flex; gap:10px; align-items:flex-start;
+  padding: 12px 12px; border: 1px solid var(--border);
+  border-radius: 14px; cursor:pointer;
+  transition: transform .06s ease, border-color .15s ease, background .15s ease;
+  background: rgba(17,24,39,.03);
+}
+.option:hover{transform: translateY(-1px); border-color: rgba(17,24,39,.22)}
+.option input{margin-top:2px}
+.option .opt-text{line-height:1.35}
+.option .opt-sub{display:block; color:var(--muted); font-size:13px; margin-top:2px}
+
+.likert{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:10px;
+  margin-top: 12px;
+}
+.likert-row{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap:8px;
+}
+.likert-item{
+  text-align:center;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 8px;
+  background: rgba(17,24,39,.03);
+  cursor:pointer;
+}
+.likert-item:hover{border-color: rgba(17,24,39,.22)}
+.likert-item input{display:block; margin:0 auto 6px}
+.likert-item span{font-size:12px; color:var(--muted)}
+
+.footer{
+  margin-top:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  justify-content:flex-start; /* not space-between */
+}
+
+.footer > div{
+  margin-left:auto; /* push the right group to the far right */
+}
+
+
+.dialog{border:none; border-radius: 18px; padding: 0; width: min(820px, 94vw); background: var(--card); color: var(--text); box-shadow: var(--shadow);}
+.dialog::backdrop{background: rgba(0,0,0,.55)}
+.dialog-inner{padding: 18px}
+.headline{
+  margin-top:10px;
+  border:1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(17,24,39,.03);
+  font-weight: 750;
+}
+.results{
+  border:1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(17,24,39,.03);
+  max-height:none;
+  overflow:visible;
+  white-space: pre-wrap;
+}
+.sep{border:none; border-top:1px solid var(--border); margin:14px 0}
+.label{display:grid; gap:8px; margin-top:10px}
+.input{width:100%; border-radius: 12px; padding: 10px 12px; border: 1px solid var(--border); background: rgba(255,255,255,.04); color: var(--text);}
+.row{display:flex; gap:10px; align-items:center; margin-top:12px; flex-wrap:wrap}
+a{color: inherit}
+
+
+
+.q-block{margin-top:18px;}
+.q-subtitle{margin:0 0 10px; font-size:18px; font-weight:700; color:var(--text); text-align:center;}
+.q-sep{border:none; border-top:1px solid rgba(17,24,39,.10); margin:18px 0;}
+
+/* Boss notes tweaks */
+.meta{display:none !important;}            /* remove pills like "Secondary crafts (likert)" */
+/* Likert vertical layout */
+.likert-row{display:flex; flex-direction:column; gap:10px;}
+.likert{max-width:520px; margin: 12px auto 0;}
+.likert-item{display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:8px; padding:12px 14px; border:1px solid rgba(17,24,39,.12); border-radius:12px; background:rgba(17,24,39,.03);}
+.likert-item input{transform:scale(1.08); margin:0;}
+.likert-item span{font-size:12px; color:var(--text);}
+
+/* Hide Next button; navigation is auto-advance */
+#next{display:none !important;}
+
+/* Make question blocks clean when showing one at a time */
+.q-subtitle{line-height:1.25;}
+
+/* results-simple */
+.results-simple h3{margin:12px 0 6px; font-size:18px;}
+.results-simple ul{margin:8px 0 0; padding-left:18px;}
+.results-simple li{margin:6px 0;}
+.results-simple a{text-decoration:underline;}
+
+/* Make the results page feel tighter/cleaner on mobile */
+@media (max-width: 640px){
+  .container{margin: 18px auto; padding: 18px 14px 28px;}
+  .card{margin-top: 14px; padding: 18px 16px;}
+  .q-subtitle{font-size: 22px;}
+  .results-simple p{margin: 6px 0;}
+  .results-simple ul{margin-top: 6px;}
+}
+
+/* v8: show progress, hide title/meta */
+.header{display:block; margin-bottom:14px;}
+#assessment-title, #assessment-subtitle, .meta-row{display:none !important;}
+#progress-text{font-weight:600; color:var(--text); margin:10px 0 0;}
+/* v8: make results one-page (no inner boxes) */
+.headline{border:none !important; padding:0 !important; background:transparent !important;}
+.results{border:none !important; padding:0 !important; background:transparent !important; overflow:visible !important; max-height:none;}
+/* results page */
+#resultsPage{padding-top:18px;}
+
+/* Mobile tightening (results page spacing + overall padding) */
+@media (max-width: 640px){
+  .container{margin: 24px auto; padding: 18px 14px 32px;}
+  .card{padding: 20px 18px;}
+  .q-title{font-size: 24px;}
+  .q-subtitle{font-size: 22px;}
+  .footer{margin-top:10px;}
+
+  /* Results: reduce large white gaps */
+  .results-simple h3{margin:10px 0 6px;}
+  .results-simple p{margin:6px 0;}
+  .results-simple ul{margin:6px 0 0;}
+}
+
+/* no-internal-scroll */
+html, body{
+  height:auto !important;
+  min-height:0 !important;
+  overflow-y:visible !important;
+}
+
+.container, .card, #resultsPage, #resultsBox, .results, .dialog-inner{
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+button.btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: var(--font-body);
+}
+button.btn.btn-primary {
+  background: linear-gradient(90deg,var(--primary),var(--primary2));
+  border: none;
+  color: white;
+}
+button.btn.btn-secondary {
+  background: rgba(17,24,39,.05);
+  color: var(--text);
+}
