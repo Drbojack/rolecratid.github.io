@@ -588,8 +588,8 @@ if (restartBtn){
   restartBtn.addEventListener('click', () => {
     clearSaved();
     state.started = false;
-	  state.completed = false;
-	state.completedAt = null;
+  state.completed = false;
+  state.completedAt = null;
     state.pageIdx = 0;
     state.seed = Math.floor(Math.random() * 2**31);
     state.pages = buildPages(state.seed);
