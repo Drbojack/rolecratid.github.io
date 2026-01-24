@@ -505,6 +505,9 @@ function showResults() {
   state.started = false;
   saveState(state);
 
+	document.body.classList.add('show-results');
+
+
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -546,6 +549,7 @@ if (restartBtn) {
 const restartBtn = document.getElementById('restartResults');
 if (restartBtn){
   restartBtn.addEventListener('click', () => {
+	    document.body.classList.remove('show-results');
     clearSaved();
     state.started = false;
   state.completed = false;
