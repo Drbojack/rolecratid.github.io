@@ -456,10 +456,20 @@ function showResults(){
 
 // Render primary role image (if available)
 const visualEl = document.querySelector('.results-visual');
-if (visualEl){
-  const img = ROLE_IMAGES[primaryRoles[0]];
+if (visualEl && primaryRoles.length){
+  // Normalize role label (e.g. "Learned Teacher" -> "Teacher")
+  const normalizedRole = primaryRoles[0]
+    .replace(/^Learned\s+/i, '')
+    .replace(/^Insightful\s+/i, '')
+    .replace(/^Organized\s+/i, '')
+    .replace(/^Visionary\s+/i, '')
+    .replace(/^Trusted\s+/i, '')
+    .replace(/^Mindful\s+/i, '')
+    .trim();
+
+  const img = ROLE_IMAGES[normalizedRole];
   visualEl.innerHTML = img
-    ? `<img src="${img}" alt="${primaryRoles[0]} role icon" />`
+    ? `<img src="${img}" alt="${normalizedRole} role icon" />`
     : "";
 }
 
