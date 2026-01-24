@@ -2,6 +2,18 @@ import { config, banks } from './questions.js';
 
 const el = (id) => document.getElementById(id);
 
+// Role → image mapping (results page)
+const ROLE_IMAGES = {
+  "Prophet": "/images/prophet.png",
+  "Teacher": "/images/teacher.png",
+  "Exhorter": "/images/exhorter.png",
+  "Servant": "/images/servant.png",
+  "Steward": "/images/steward.png",
+  "Leader": "/images/leader.png",
+  "Mercy": "/images/mercy.png"
+};
+
+
 /** ---------- Seeded RNG (stable random order across refresh/return) ---------- **/
 function mulberry32(seed){
   let t = seed >>> 0;
@@ -107,8 +119,26 @@ function ensureKeys(){
 }
 ensureKeys();
 
+// 🔒 Guard against corrupted completed state (completed but no answers)
+if (state.completed && state.answers.size === 0){
+  state.completed = false;
+  state.completedAt = null;
+  state.started = false;
+  saveState(state);
+}
+
+
 function computeTotals(){
   ensureKeys();
+
+// 🔒 Guard against corrupted completed state (completed but no answers)
+if (state.completed && state.answers.size === 0){
+  state.completed = false;
+  state.completedAt = null;
+  state.started = false;
+  saveState(state);
+}
+
   for (const g of ["roles","crafts","sdt"]){
     for (const k of Object.keys(state.totals[g])) state.totals[g][k] = 0;
   }
@@ -423,6 +453,16 @@ function showResults(){
   const sdt10 = toOutOf10(state.totals.sdt, config.maxPoints.sdt);
 
   const primaryRoles = topKeys(roles10).keys;
+
+// Render primary role image (if available)
+const visualEl = document.querySelector('.results-visual');
+if (visualEl){
+  const img = ROLE_IMAGES[primaryRoles[0]];
+  visualEl.innerHTML = img
+    ? `<img src="${img}" alt="${primaryRoles[0]} role icon" />`
+    : "";
+}
+
   const secondaryCrafts = topKeys(crafts10).keys;
   const sdtRank = rankKeys(sdt10);
 
