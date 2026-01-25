@@ -6,107 +6,42 @@
   <title>RoleCraftID Assessment</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
   <main class="container">
 
-    <!-- ================= HEADER ================= -->
     <header class="header">
       <h1 id="assessment-title">RoleCraftID</h1>
-      <p id="assessment-subtitle" class="muted"></p>
-
-      <div class="meta-row">
-        <span class="pill" id="section-pill">Section</span>
-        <span class="pill" id="question-pill">Question</span>
-      </div>
-
-      <div class="progress-wrap" aria-label="Progress">
+      <div class="progress-wrap">
         <div class="progress-bar" id="progress-bar"></div>
       </div>
-      <p class="muted" id="progress-text">0%</p>
+      <p class="muted" id="progress-text"></p>
     </header>
 
-    <!-- ================= QUESTION CARD ================= -->
-    <section id="card" class="card" aria-live="polite"></section>
+    <section id="card" class="card"></section>
 
-    <!-- ================= RESULTS PAGE (NOT A CARD) ================= -->
-<section id="resultsPage" class="results-page" style="display:none;">
-  <div class="results-inner">
-
-    <div class="results-layout">
-
-      <!-- LEFT: role image -->
-      <div class="results-left">
-        <div class="results-visual"></div>
-      </div>
-
-      <!-- RIGHT: all results content -->
-      <div class="results-right">
-        <h2>Your RoleCraftID Results</h2>
-
-        <div id="resultsHeadline" class="results-headline"></div>
-        <div id="resultsLinks" class="results-links"></div>
-
-        <!-- THIS is where scrolling content lives -->
-        <div id="resultsBox" class="results-body"></div>
-
-        <div class="results-actions">
-          <button id="restartResults"
-                  class="btn btn-secondary"
-                  type="button">
-            Restart test
-          </button>
+    <section id="resultsPage">
+      <div class="results-inner">
+        <div class="results-layout">
+          <div class="results-left">
+            <div class="results-visual" id="resultsVisual"></div>
+          </div>
+          <div class="results-right">
+            <h2>Your RoleCraftID Results</h2>
+            <div id="resultsHeadline" class="results-headline"></div>
+            <div id="resultsBox"></div>
+            <button id="restartResults" class="btn">Restart</button>
+          </div>
         </div>
-
-        <hr class="sep" />
-
-        <h3>Email me my results</h3>
-        <p class="muted">
-          Optional. You’ll also see your results on-screen above.
-        </p>
-
-        <label class="label">
-          Email address
-          <input id="emailInput"
-                 class="input"
-                 type="email"
-                 placeholder="you@example.com"
-                 autocomplete="email" />
-        </label>
-
-        <div class="row">
-          <button id="sendEmail"
-                  class="btn btn-primary"
-                  type="button">
-            Send email
-          </button>
-        </div>
-
-        <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
       </div>
+    </section>
 
-    </div>
-  </div>
-</section>
-
-
-    <!-- ================= FOOTER NAV ================= -->
     <footer id="nav" class="footer">
-      <button id="prev" class="btn btn-secondary" type="button">Back</button>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <button id="restartAlways" class="btn btn-secondary" type="button">Restart</button>
-        <button id="next" class="btn btn-primary" type="button">Next</button>
-      </div>
+      <button id="prev" class="btn">Back</button>
+      <button id="next" class="btn">Next</button>
     </footer>
 
   </main>
 
-  <!-- ================= SCRIPTS ================= -->
-
-  <!-- EmailJS (optional) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <script type="module" src="./questions.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
 </html>
