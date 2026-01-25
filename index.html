@@ -6,11 +6,8 @@
   <title>RoleCraftID Assessment</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
   <main class="container">
-
-    <!-- ================= HEADER ================= -->
     <header class="header">
       <h1 id="assessment-title">RoleCraftID</h1>
       <p id="assessment-subtitle" class="muted"></p>
@@ -26,71 +23,37 @@
       <p class="muted" id="progress-text">0%</p>
     </header>
 
-    <!-- ================= QUESTION CARD ================= -->
     <section id="card" class="card" aria-live="polite"></section>
 
-    <!-- ================= RESULTS PAGE (NOT A CARD) ================= -->
-<section id="resultsPage" class="results-page" style="display:none;">
-  <div class="results-inner">
+    <section id="resultsPage" class="card" style="display:none;">
+      <h2 style="margin:0 0 10px;">Your RoleCraftID Results</h2>
 
-    <div class="results-layout">
+      <div id="resultsLinks" class="muted" style="margin-top:8px;"></div>
 
-      <!-- LEFT: role image -->
-      <div class="results-left">
-        <div class="results-visual"></div>
+      <div id="resultsBox" class="results results-simple" style="margin-top:12px;"></div>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="restartResults" class="btn btn-secondary" type="button">Restart test</button>
       </div>
 
-      <!-- RIGHT: all results content -->
-      <div class="results-right">
-        <h2>Your RoleCraftID Results</h2>
+      <hr class="sep" />
 
-        <div id="resultsHeadline" class="results-headline"></div>
-        <div id="resultsLinks" class="results-links"></div>
+      <h3>Email me my results</h3>
+      <p class="muted">Optional. You’ll also see your results on-screen above.</p>
 
-        <!-- THIS is where scrolling content lives -->
-        <div id="resultsBox" class="results-body"></div>
+      <label class="label">
+        Email address
+        <input id="emailInput" class="input" type="email" placeholder="you@example.com" autocomplete="email" />
+      </label>
 
-        <div class="results-actions">
-          <button id="restartResults"
-                  class="btn btn-secondary"
-                  type="button">
-            Restart test
-          </button>
-        </div>
-
-        <hr class="sep" />
-
-        <h3>Email me my results</h3>
-        <p class="muted">
-          Optional. You’ll also see your results on-screen above.
-        </p>
-
-        <label class="label">
-          Email address
-          <input id="emailInput"
-                 class="input"
-                 type="email"
-                 placeholder="you@example.com"
-                 autocomplete="email" />
-        </label>
-
-        <div class="row">
-          <button id="sendEmail"
-                  class="btn btn-primary"
-                  type="button">
-            Send email
-          </button>
-        </div>
-
-        <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
+      <div class="row">
+        <button id="sendEmail" class="btn btn-primary" type="button">Send email</button>
       </div>
 
-    </div>
-  </div>
-</section>
+      <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
+    </section>
 
 
-    <!-- ================= FOOTER NAV ================= -->
     <footer id="nav" class="footer">
       <button id="prev" class="btn btn-secondary" type="button">Back</button>
       <div style="display:flex; gap:10px; align-items:center;">
@@ -98,12 +61,9 @@
         <button id="next" class="btn btn-primary" type="button">Next</button>
       </div>
     </footer>
-
   </main>
 
-  <!-- ================= SCRIPTS ================= -->
-
-  <!-- EmailJS (optional) -->
+<!-- EmailJS (optional) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script type="module" src="./questions.js"></script>

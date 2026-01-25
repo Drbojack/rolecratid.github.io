@@ -1,22 +1,6 @@
-
-// This is a reattached copy of app.fixed.js
-// (Content restored verbatim from the previous fixed version)
-
 import { config, banks } from './questions.js';
 
 const el = (id) => document.getElementById(id);
-
-// Role → image mapping (results page)
-const ROLE_IMAGES = {
-  "Prophet": "images/prophet.png",
-  "Teacher": "images/teacher.png",
-  "Exhorter": "images/exhorter.png",
-  "Servant": "images/servant.png",
-  "Steward": "images/steward.png",
-  "Leader": "images/leader.png",
-  "Mercy": "images/mercy.png"
-};
-
 
 /** ---------- Seeded RNG (stable random order across refresh/return) ---------- **/
 function mulberry32(seed){
@@ -123,26 +107,8 @@ function ensureKeys(){
 }
 ensureKeys();
 
-// 🔒 Guard against corrupted completed state (completed but no answers)
-if (state.completed && state.answers.size === 0){
-  state.completed = false;
-  state.completedAt = null;
-  state.started = false;
-  saveState(state);
-}
-
-
 function computeTotals(){
   ensureKeys();
-
-// 🔒 Guard against corrupted completed state (completed but no answers)
-if (state.completed && state.answers.size === 0){
-  state.completed = false;
-  state.completedAt = null;
-  state.started = false;
-  saveState(state);
-}
-
   for (const g of ["roles","crafts","sdt"]){
     for (const k of Object.keys(state.totals[g])) state.totals[g][k] = 0;
   }
@@ -316,8 +282,7 @@ function renderStart(){
 
   if (hasProgress){
     document.getElementById('restartBtn').onclick = () => {
-      document.body.classList.remove('show-results');
-    clearSaved();
+      clearSaved();
       state.started = false;
       state.completed = false;
       state.completedAt = null;
@@ -325,6 +290,8 @@ function renderStart(){
       state.seed = Math.floor(Math.random() * 2**31);
       state.pages = buildPages(state.seed);
       state.answers = new Map();
+      state.completed = false;
+      state.completedAt = null;
       saveState(state);
       renderStart();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -363,17 +330,11 @@ if (nav) nav.style.display = state.started ? 'flex' : 'none';
   el('next').textContent = (state.pageIdx === state.pages.length - 1) ? 'Finish' : 'Next';
   el('next').disabled = !isPageAnswered(page);
 
-  const cardEl = el('card');
-  cardEl.classList.add('is-fading');
-
-  setTimeout(() => {
-    cardEl.innerHTML = (page.type === "likert")
+  el('card').innerHTML = (page.type === "likert")
     ? renderLikertQuestion(q)
     : renderForcedQuestion(q);
 
-    cardEl.classList.remove('is-fading');
-    bindInputs(cardEl);
-  }, 120);
+  bindInputs(el('card'));
 	
 }
 
@@ -456,9 +417,110 @@ function setupEmail(){
 	  });
 }
 
+function showResults(){
+  computeTotals();
 
+  const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
+  const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
+  const sdt10 = toOutOf10(state.totals.sdt, config.maxPoints.sdt);
 
+  const primaryRoles = topKeys(roles10).keys;
+  const secondaryCrafts = topKeys(crafts10).keys;
+  const sdtRank = rankKeys(sdt10);
 
+  const roleLinksTop = primaryRoles
+    .map(r => `<a href="${linkFor('roles', r)}" target="_blank" rel="noopener">${escapeHtml(r)}</a>`)
+    .join(" & ");
+  const craftLinksTop = secondaryCrafts
+    .map(c => `<a href="${linkFor('crafts', c)}" target="_blank" rel="noopener">${escapeHtml(c)}</a>`)
+    .join(" & ");
+  el('resultsLinks').innerHTML = `Primary: ${roleLinksTop} · Secondary: ${craftLinksTop}`;
+
+  // Scores lists (every profile name hyperlinked)
+  const roleLis = rankKeys(roles10)
+    .map(r => `<li><a href="${linkFor('roles', r.key)}" target="_blank" rel="noopener">${escapeHtml(r.key)}</a>: <strong>${r.score}/10</strong></li>`)
+    .join("");
+  const craftLis = rankKeys(crafts10)
+    .map(r => `<li><a href="${linkFor('crafts', r.key)}" target="_blank" rel="noopener">${escapeHtml(r.key)}</a>: <strong>${r.score}/10</strong></li>`)
+    .join("");
+  const sdtLis = sdtRank
+    .map(r => `<li><a href="${linkFor('sdt', r.key)}" target="_blank" rel="noopener">${escapeHtml(r.key)}</a>: <strong>${r.score}/10</strong></li>`)
+    .join("");
+
+  const primaryRole = primaryRoles.join(" & ");
+  const secondaryCraft = secondaryCrafts.join(" & ");
+  const contactUrl = (config.urls.overview && config.urls.overview.contact) ? config.urls.overview.contact : "#";
+
+  // Text payload used for EmailJS (matches provided doc structure loosely)
+  const resultsText = [
+    `RoleCraft Identity (RCID): ${primaryRole} / ${secondaryCraft}`,
+    ``,
+    `Primary Roles`,
+    ...rankKeys(roles10).map(r => `${r.key}: ${r.score}/10`),
+    ``,
+    `Secondary Crafts`,
+    ...rankKeys(crafts10).map(r => `${r.key}: ${r.score}/10`),
+    ``,
+    `Self-Determination Priorities`,
+    ...sdtRank.map(r => `${r.key}: ${r.score}/10`)
+  ].join('\\n');
+
+  const resultsLinks = [
+    `Primary Role: ${primaryRole} (${primaryRoles.map(r => linkFor('roles', r)).join(', ')})`,
+    `Secondary Craft: ${secondaryCraft} (${secondaryCrafts.map(c => linkFor('crafts', c)).join(', ')})`,
+  ].join('\\n');
+
+  // On-screen page formatted like the provided "Results Screen" doc
+  el('resultsBox').innerHTML = `
+    <div class="results-content">
+      <p class="results-lead">Thank you for completing the RoleCraftID personality test.</p>
+      <p class="muted">If you’d like a copy in your inbox, use the email box below. You’ll also see your results on-screen here.</p>
+      <p class="muted">Contact us if you don’t receive your results or have any questions: <a href="${contactUrl}" target="_blank" rel="noopener">Contact page</a></p>
+
+      <h3>Your RoleCraft Identity (RCID)</h3>
+      <p class="results-rcid"><strong>${escapeHtml(primaryRole)} / ${escapeHtml(secondaryCraft)}</strong></p>
+      <p class="muted">This reflects how you are intrinsically motivated to contribute and how that contribution tends to show up in action. Explore each profile using the links below.</p>
+
+      <h3>Your Primary Role</h3>
+      <p><a href="${linkFor('roles', primaryRoles[0])}" target="_blank" rel="noopener"><strong>${escapeHtml(primaryRoles[0])}</strong></a> represents your core intrinsic contribution pattern.</p>
+      <p class="muted">Here is how you scored across all Roles:</p>
+      <ul class="results-list">${roleLis}</ul>
+
+      <h3>Your Secondary Craft</h3>
+      <p><a href="${linkFor('crafts', secondaryCrafts[0])}" target="_blank" rel="noopener"><strong>${escapeHtml(secondaryCrafts[0])}</strong></a> describes how your Role tends to express itself in practice.</p>
+      <p class="muted">Here is how you scored across all Crafts:</p>
+      <ul class="results-list">${craftLis}</ul>
+
+      <h3>Your Self-Determination Priorities (SDP)</h3>
+      <p class="muted">Your motivation is sustained by a mix of psychological drivers. Based on your assessment, your priorities rank as follows:</p>
+      <ul class="results-list">${sdtLis}</ul>
+      <p class="muted">Learn more about your SDP profile: <a href="${config.urls.overview?.sdt || '#'}" target="_blank" rel="noopener">SDT overview</a></p>
+
+      <h3>What to do next</h3>
+      <p class="muted">Your RoleCraftID is not a label or limitation. It’s a tool for awareness and choice—one that becomes more useful as you apply it to real decisions, roles, and challenges.</p>
+      <p class="muted">Continue exploring your RoleCraftID: <a href="${config.urls.overview?.rcid || '#'}" target="_blank" rel="noopener">RCID overview</a></p>
+    </div>
+  `;
+
+  el('resultsBox').dataset.payload = JSON.stringify({
+    primaryRoles,
+    secondaryCrafts,
+    sdtRank,
+    resultsText,
+    resultsLinks
+  });
+
+  el('card').style.display = "none";
+  if (el('nav')) el('nav').style.display = "none";
+  el('resultsPage').style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Mark completion so returning users can be routed to results.
+  state.completed = true;
+  state.completedAt = Date.now();
+  state.started = false;
+  saveState(state);
+}
 
 el('prev').addEventListener('click', () => {
   if (!state.started) return;
@@ -497,12 +559,8 @@ if (restartBtn) {
 const restartBtn = document.getElementById('restartResults');
 if (restartBtn){
   restartBtn.addEventListener('click', () => {
-	    document.body.classList.remove('show-results');
-    document.body.classList.remove('show-results');
     clearSaved();
     state.started = false;
-  state.completed = false;
-  state.completedAt = null;
     state.pageIdx = 0;
     state.seed = Math.floor(Math.random() * 2**31);
     state.pages = buildPages(state.seed);
@@ -521,7 +579,6 @@ if (restartBtn){
 const restartAlwaysBtn = document.getElementById('restartAlways');
 if (restartAlwaysBtn){
   restartAlwaysBtn.addEventListener('click', () => {
-    document.body.classList.remove('show-results');
     clearSaved();
     state.started = false;
     state.completed = false;
@@ -541,58 +598,10 @@ if (restartAlwaysBtn){
   });
 }
 
-
-function showResults() {
-  computeTotals();
-
-  const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
-  const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
-
-  const primaryRoles = topKeys(roles10).keys;
-  const secondaryCrafts = topKeys(crafts10).keys;
-
-  el('resultsBox').innerHTML = `
-    <div class="results-inner">
-      <div class="results-layout">
-        <div class="results-left">
-          <div class="results-visual"></div>
-        </div>
-        <div class="results-right">
-          <h2>Your RoleCraftID Results</h2>
-          <div class="results-headline">
-            ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
-          </div>
-          <div class="results-links">
-            Primary: ${primaryRoles.join(' & ')} · Secondary: ${secondaryCrafts.join(' & ')}
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  const visualEl = document.querySelector('.results-visual');
-  if (visualEl && primaryRoles.length) {
-    const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
-    const imgPath = ROLE_IMAGES[baseRole];
-    if (imgPath) {
-      visualEl.innerHTML = `<img src="${imgPath}" alt="${baseRole} role icon">`;
-    }
-  }
-
-  document.body.classList.add('show-results');
-
-  el('card').style.display = "none";
-  if (el('nav')) el('nav').style.display = "none";
-  el('resultsPage').style.display = "block";
-
-  state.completed = true;
-  state.completedAt = Date.now();
-  state.started = false;
-  saveState(state);
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-
 setupEmail();
-render();
+// If user already completed previously, jump straight to results
+if (state.completed) {
+  showResults();
+} else {
+  render();
+}
