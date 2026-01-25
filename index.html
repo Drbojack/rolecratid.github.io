@@ -30,67 +30,65 @@
     <section id="card" class="card" aria-live="polite"></section>
 
     <!-- ================= RESULTS PAGE (NOT A CARD) ================= -->
-    <section id="resultsPage" class="results-page" style="display:none;">
-      <div class="results-inner">
+<section id="resultsPage" class="results-page" style="display:none;">
+  <div class="results-inner">
 
-        <div class="results-layout">
+    <div class="results-layout">
 
-          <!-- LEFT COLUMN -->
-          <div class="results-left">
-            <div class="results-visual"></div>
-          </div>
-
-          <!-- RIGHT COLUMN -->
-          <div class="results-right">
-            <h2>Your RoleCraftID Results</h2>
-
-            <div id="resultsHeadline" class="results-headline"></div>
-            <div id="resultsLinks" class="results-links"></div>
-
-            <div id="resultsBox" class="results-body"></div>
-
-            <div class="results-actions">
-              <button
-                id="restartResults"
-                class="btn btn-secondary"
-                type="button">
-                Restart test
-              </button>
-            </div>
-
-            <hr class="sep" />
-
-            <h3>Email me my results</h3>
-            <p class="muted">
-              Optional. You’ll also see your results on-screen above.
-            </p>
-
-            <label class="label">
-              Email address
-              <input
-                id="emailInput"
-                class="input"
-                type="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-              />
-            </label>
-
-            <div class="row">
-              <button
-                id="sendEmail"
-                class="btn btn-primary"
-                type="button">
-                Send email
-              </button>
-            </div>
-
-            <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
-          </div>
-
-        </div>
+      <!-- LEFT: role image -->
+      <div class="results-left">
+        <div class="results-visual"></div>
       </div>
-    </section>
+
+      <!-- RIGHT: all results content -->
+      <div class="results-right">
+        <h2>Your RoleCraftID Results</h2>
+
+        <div id="resultsHeadline" class="results-headline"></div>
+        <div id="resultsLinks" class="results-links"></div>
+
+        <!-- THIS is where scrolling content lives -->
+        <div id="resultsBox" class="results-body"></div>
+
+        <div class="results-actions">
+          <button id="restartResults"
+                  class="btn btn-secondary"
+                  type="button">
+            Restart test
+          </button>
+        </div>
+
+        <hr class="sep" />
+
+        <h3>Email me my results</h3>
+        <p class="muted">
+          Optional. You’ll also see your results on-screen above.
+        </p>
+
+        <label class="label">
+          Email address
+          <input id="emailInput"
+                 class="input"
+                 type="email"
+                 placeholder="you@example.com"
+                 autocomplete="email" />
+        </label>
+
+        <div class="row">
+          <button id="sendEmail"
+                  class="btn btn-primary"
+                  type="button">
+            Send email
+          </button>
+        </div>
+
+        <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- ================= FOOTER NAV ================= -->
     <footer id="nav" class="footer">
