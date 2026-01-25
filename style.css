@@ -243,27 +243,31 @@ button.btn.btn-secondary {
    Results + scroll + fade (FINAL)
    =============================== */
 
-#resultsPage { display: none; }
+/* ===============================
+   RESULTS PAGE (FINAL, SINGLE SYSTEM)
+   =============================== */
+
+#resultsPage {
+  display: none;
+}
 
 body.show-results #resultsPage {
   display: block;
 }
 
+/* Remove card styling entirely on results */
 body.show-results .card {
-  max-width: none;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  overflow: visible;
+  display: none;
 }
 
+/* Wrapper */
 .results-inner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 32px 20px 64px;
 }
 
+/* Two-column layout */
 .results-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -271,17 +275,17 @@ body.show-results .card {
   align-items: flex-start;
 }
 
+/* LEFT */
 .results-left {
   display: flex;
   justify-content: center;
 }
 
 .results-visual {
-  width: 100%;
-  max-width: 260px;
-  min-height: 260px;
+  width: 260px;
+  height: 260px;
   border-radius: 18px;
-  background: rgba(17, 24, 39, 0.04);
+  background: rgba(17,24,39,.04);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,27 +293,34 @@ body.show-results .card {
 
 .results-visual img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   border-radius: 18px;
 }
 
+/* RIGHT */
 .results-right h2 {
   font-size: 32px;
   margin: 0 0 12px;
-  line-height: 1.2;
 }
 
 .results-headline {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .results-links {
   color: var(--muted);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
+.results-body {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Mobile */
 @media (max-width: 900px) {
   .results-layout {
     grid-template-columns: 1fr;
@@ -317,7 +328,7 @@ body.show-results .card {
   }
 }
 
-/* Single scrollbar */
+/* Single scrollbar ONLY */
 html, body {
   overflow-x: hidden;
 }
