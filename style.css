@@ -266,10 +266,11 @@ body.show-results .card {
 
 .results-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 48px;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 64px;
   align-items: flex-start;
 }
+
 
 .results-left {
   display: flex;
@@ -336,9 +337,6 @@ html, body {
   gap: 0 !important;
 }
 
-.results-right {
-  max-width: 720px;
-}
 
 /* Text styling */
 .results-description {
