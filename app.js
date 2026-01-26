@@ -552,32 +552,39 @@ function showResults() {
   const secondaryCrafts = topKeys(crafts10).keys;
 
   el('resultsBox').innerHTML = `
-    <div class="results-inner">
-      <div class="results-layout">
-        <div class="results-left">
-          <div class="results-visual"></div>
+  <div class="results-inner">
+    <div class="results-layout single-column">
+      <div class="results-right">
+        <h2>Your RoleCraftID Results</h2>
+
+        <div class="results-headline">
+          ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
         </div>
-        <div class="results-right">
-          <h2>Your RoleCraftID Results</h2>
-          <div class="results-headline">
-            ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
-          </div>
-          <div class="results-links">
-            Primary: ${primaryRoles.join(' & ')} · Secondary: ${secondaryCrafts.join(' & ')}
-          </div>
-        </div>
+
+        <p class="results-description">
+          Thank you for completing the RoleCraft ID personality test.
+          Based on your responses, your RoleCraft Identity (RCID) is:
+        </p>
+
+        <p class="results-rcid">
+          <strong>${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}</strong>
+        </p>
+
+        <p class="results-description">
+          If you would like more information on what your results mean,
+          please put in your email below.
+        </p>
+
+        <p class="results-description">
+          <a href="https://www.rolecraftid.com/contact">Contact us</a>
+          if you have any questions.
+        </p>
       </div>
     </div>
-  `;
+  </div>
+`;
 
-  const visualEl = document.querySelector('.results-visual');
-  if (visualEl && primaryRoles.length) {
-    const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
-    const imgPath = ROLE_IMAGES[baseRole];
-    if (imgPath) {
-      visualEl.innerHTML = `<img src="${imgPath}" alt="${baseRole} role icon">`;
-    }
-  }
+
 
   document.body.classList.add('show-results');
 
