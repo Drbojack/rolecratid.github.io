@@ -554,6 +554,10 @@ function showResults() {
   el('resultsBox').innerHTML = `
   <div class="results-inner">
     <div class="results-layout single-column">
+	  <!-- LEFT: IMAGE -->
+      <div class="results-left">
+        <div class="results-visual"></div>
+      </div>
       <div class="results-right">
         <h2>Your RoleCraftID Results</h2>
 
@@ -584,6 +588,16 @@ function showResults() {
   </div>
 `;
 
+const visualEl = document.querySelector('.results-visual');
+if (visualEl && primaryRoles.length) {
+  const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
+  const imgPath = ROLE_IMAGES[baseRole];
+  if (imgPath) {
+    visualEl.innerHTML = `
+      <img src="${imgPath}" alt="${baseRole} role image">
+    `;
+  }
+}
 
 
   document.body.classList.add('show-results');
