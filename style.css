@@ -300,6 +300,12 @@ body.show-results .card {
   line-height: 1.2;
 }
 
+.results-right p {
+  max-width: 900px;
+  line-height: 1.65;
+}
+
+
 .results-headline {
   font-size: 18px;
   font-weight: 700;
