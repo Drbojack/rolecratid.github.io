@@ -275,13 +275,13 @@ body.show-results .card {
 
 .results-left {
   display: flex;
-  justify-content: center;
+  align-items: flex-start; /* 🔑 key fix */
 }
+
 
 .results-visual {
   width: 100%;
   max-width: 260px;
-  min-height: 260px;
   border-radius: 18px;
   background: transparent;
   display: flex;
