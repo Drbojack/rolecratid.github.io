@@ -322,7 +322,12 @@ body.show-results .card {
     grid-template-columns: 1fr;
     gap: 28px;
   }
+
+  .results-right p {
+    max-width: 100%;
+  }
 }
+
 
 /* Single scrollbar */
 html, body {
