@@ -561,10 +561,7 @@ function showResults() {
       <div class="results-right">
         <h2>Your RoleCraftID Results</h2>
 
-        <div class="results-headline">
-          ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
-        </div>
-
+    
         <p class="results-description">
           Thank you for completing the RoleCraft ID personality test.
           Based on your responses, your RoleCraft Identity (RCID) is:
