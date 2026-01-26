@@ -3,110 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RoleCraftID Assessment</title>
+  <title>RoleCraftID Results</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
-  <main class="container">
 
-    <!-- ================= HEADER ================= -->
-    <header class="header">
-      <h1 id="assessment-title">RoleCraftID</h1>
-      <p id="assessment-subtitle" class="muted"></p>
+<main class="container">
 
-      <div class="meta-row">
-        <span class="pill" id="section-pill">Section</span>
-        <span class="pill" id="question-pill">Question</span>
-      </div>
+  <section id="resultsPage">
+    <div class="results-inner">
+      <div class="results-layout">
 
-      <div class="progress-wrap" aria-label="Progress">
-        <div class="progress-bar" id="progress-bar"></div>
-      </div>
-      <p class="muted" id="progress-text">0%</p>
-    </header>
-
-    <!-- ================= QUESTION CARD ================= -->
-    <section id="card" class="card" aria-live="polite"></section>
-
-    <!-- ================= RESULTS PAGE (NOT A CARD) ================= -->
-    <section id="resultsPage" class="results-page" style="display:none;">
-      <div class="results-inner">
-
-        <div class="results-layout">
-
-          <!-- LEFT COLUMN -->
-          <div class="results-left">
-            <div class="results-visual"></div>
+        <div class="results-left">
+          <div class="results-visual">
+            <!-- image injected by JS -->
           </div>
-
-      
-
-            <div id="resultsHeadline" class="results-headline"></div>
-            <div id="resultsLinks" class="results-links"></div>
-
-            <div id="resultsBox" class="results-body"></div>
-
-            <div class="results-actions">
-              <button
-                id="restartResults"
-                class="btn btn-secondary"
-                type="button">
-                Restart test
-              </button>
-            </div>
-
-            <hr class="sep" />
-
-            <h3>Email me my results</h3>
-            <p class="muted">
-              Optional. You’ll also see your results on-screen above.
-            </p>
-
-            <label class="label">
-              Email address
-              <input
-                id="emailInput"
-                class="input"
-                type="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-              />
-            </label>
-
-            <div class="row">
-              <button
-                id="sendEmail"
-                class="btn btn-primary"
-                type="button">
-                Send email
-              </button>
-            </div>
-
-            <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
-          </div>
-
         </div>
+
+        <div class="results-right">
+          <h2>Your RoleCraftID Results</h2>
+
+          <div class="results-headline">
+            Visionary Exhorter / Engager
+          </div>
+
+          <p>
+            Thank you for completing the RoleCraft ID personality test.
+            Based on your responses, your RoleCraft Identity (RCID) is:
+          </p>
+
+          <p class="results-rcid">
+            <strong>Visionary Exhorter / Engager</strong>
+          </p>
+
+          <p>
+            If you would like more information, please get your extended
+            results by email below.
+          </p>
+
+          <p>
+            <a href="#">Contact us</a> if you have any questions.
+          </p>
+
+          <button class="btn">Restart test</button>
+
+          <hr />
+
+          <h3>Email me my results</h3>
+          <input class="input" placeholder="you@example.com" />
+        </div>
+
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ================= FOOTER NAV ================= -->
-    <footer id="nav" class="footer">
-      <button id="prev" class="btn btn-secondary" type="button">Back</button>
-      <div style="display:flex; gap:10px; align-items:center;">
-        <button id="restartAlways" class="btn btn-secondary" type="button">Restart</button>
-        <button id="next" class="btn btn-primary" type="button">Next</button>
-      </div>
-    </footer>
+</main>
 
-  </main>
-
-  <!-- ================= SCRIPTS ================= -->
-
-  <!-- EmailJS (optional) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <script type="module" src="./questions.js"></script>
-  <script type="module" src="./app.js"></script>
 </body>
 </html>
