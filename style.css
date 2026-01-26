@@ -282,7 +282,7 @@ body.show-results .card {
   max-width: 260px;
   min-height: 260px;
   border-radius: 18px;
-  background: rgba(17, 24, 39, 0.04);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
