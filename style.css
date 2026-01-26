@@ -329,3 +329,26 @@ html, body {
 .card.is-fading {
   opacity: 0;
 }
+
+/* Single-column results layout */
+.results-layout.single-column {
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+}
+
+.results-right {
+  max-width: 720px;
+}
+
+/* Text styling */
+.results-description {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.results-rcid {
+  font-size: 18px;
+  margin: 8px 0 16px;
+}
+
