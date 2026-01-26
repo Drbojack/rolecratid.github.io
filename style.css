@@ -323,10 +323,12 @@ body.show-results .card {
     gap: 28px;
   }
 
-  .results-right p {
-    max-width: 100%;
+  .results-visual {
+    max-width: 220px;
+    margin-bottom: 20px;
   }
 }
+
 
 
 /* Single scrollbar */
