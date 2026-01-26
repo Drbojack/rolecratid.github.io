@@ -571,8 +571,8 @@ function showResults() {
         </p>
 
         <p class="results-description">
-          If you would like more information on what your results mean,
-          please put in your email below.
+          If you would like more information,
+          please get your extended results by email below.
         </p>
 
         <p class="results-description">
