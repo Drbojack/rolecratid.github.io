@@ -587,17 +587,19 @@ function showResults() {
     </div>
   </div>
 `;
-
 const visualEl = document.querySelector('.results-visual');
-if (visualEl && primaryRoles.length) {
-  const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
+
+const baseRole = Object.keys(ROLE_IMAGES).find(role =>
+  primaryRoles[0].includes(role)
+);
+
+if (visualEl && baseRole) {
   const imgPath = ROLE_IMAGES[baseRole];
-  if (imgPath) {
-    visualEl.innerHTML = `
-      <img src="${imgPath}" alt="${baseRole} role image">
-    `;
-  }
+  visualEl.innerHTML = `
+    <img src="${imgPath}" alt="${baseRole} role image">
+  `;
 }
+
 
 
   document.body.classList.add('show-results');
