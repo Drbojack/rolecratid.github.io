@@ -316,7 +316,8 @@ function renderStart(){
 
   if (hasProgress){
     document.getElementById('restartBtn').onclick = () => {
-      clearSaved();
+      document.body.classList.remove('show-results');
+    clearSaved();
       state.started = false;
       state.completed = false;
       state.completedAt = null;
@@ -457,56 +458,6 @@ function setupEmail(){
 
 
 
-function showResults() {
-  computeTotals();
-
-  const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
-  const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
-  const sdt10 = toOutOf10(state.totals.sdt, config.maxPoints.sdt);
-
-  const primaryRoles = topKeys(roles10).keys;
-  const secondaryCrafts = topKeys(crafts10).keys;
-  const sdtRank = rankKeys(sdt10);
-
-  // Build results HTML FIRST
-  el('resultsBox').innerHTML = `
-    <div class="results-layout">
-      <div class="results-left">
-        <div class="results-visual"></div>
-      </div>
-      <div class="results-right">
-        <h2>Your RoleCraftID Results</h2>
-        <div class="results-headline">
-          ${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}
-        </div>
-        <div class="results-links">
-          Primary: ${primaryRoles.join(' & ')} · Secondary: ${secondaryCrafts.join(' & ')}
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Inject role image AFTER layout exists
-  const visualEl = document.querySelector('.results-visual');
-  if (visualEl && primaryRoles.length) {
-    const baseRole = primaryRoles[0].split(' ').slice(-1)[0];
-    const imgPath = ROLE_IMAGES[baseRole];
-    if (imgPath) {
-      visualEl.innerHTML = `<img src="${imgPath}" alt="${baseRole} role icon">`;
-    }
-  }
-
-  el('card').style.display = "none";
-  if (el('nav')) el('nav').style.display = "none";
-  el('resultsPage').style.display = "block";
-
-  state.completed = true;
-  state.completedAt = Date.now();
-  state.started = false;
-  saveState(state);
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
 
 el('prev').addEventListener('click', () => {
@@ -546,6 +497,8 @@ if (restartBtn) {
 const restartBtn = document.getElementById('restartResults');
 if (restartBtn){
   restartBtn.addEventListener('click', () => {
+	    document.body.classList.remove('show-results');
+    document.body.classList.remove('show-results');
     clearSaved();
     state.started = false;
   state.completed = false;
@@ -568,6 +521,7 @@ if (restartBtn){
 const restartAlwaysBtn = document.getElementById('restartAlways');
 if (restartAlwaysBtn){
   restartAlwaysBtn.addEventListener('click', () => {
+    document.body.classList.remove('show-results');
     clearSaved();
     state.started = false;
     state.completed = false;
@@ -586,6 +540,79 @@ if (restartAlwaysBtn){
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+
+function showResults() {
+  computeTotals();
+
+  const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
+  const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
+
+  const primaryRoles = topKeys(roles10).keys;
+  const secondaryCrafts = topKeys(crafts10).keys;
+
+  el('resultsBox').innerHTML = `
+  <div class="results-inner">
+    <div class="results-layout single-column">
+	  <!-- LEFT: IMAGE -->
+      <div class="results-left">
+        <div class="results-visual"></div>
+      </div>
+      <div class="results-right">
+        <h2>Your RoleCraftID Results</h2>
+
+    
+        <p class="results-description">
+          Thank you for completing the RoleCraft ID personality test.
+          Based on your responses, your RoleCraft Identity (RCID) is:
+        </p>
+
+        <p class="results-rcid">
+          <strong>${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}</strong>
+        </p>
+
+        <p class="results-description">
+          If you would like more information,
+          please get your extended results by email below.
+        </p>
+
+        <p class="results-description">
+          <a href="https://www.rolecraftid.com/contact">Contact us</a>
+          if you have any questions.
+        </p>
+      </div>
+    </div>
+  </div>
+`;
+const visualEl = document.querySelector('.results-visual');
+
+const baseRole = Object.keys(ROLE_IMAGES).find(role =>
+  primaryRoles[0].includes(role)
+);
+
+if (visualEl && baseRole) {
+  const imgPath = ROLE_IMAGES[baseRole];
+  visualEl.innerHTML = `
+    <img src="${imgPath}" alt="${baseRole} role image">
+  `;
+}
+
+
+
+  document.body.classList.add('show-results');
+
+  el('card').style.display = "none";
+  if (el('nav')) el('nav').style.display = "none";
+  el('resultsPage').style.display = "block";
+
+  state.completed = true;
+  state.completedAt = Date.now();
+  state.started = false;
+  saveState(state);
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 
 setupEmail();
 render();

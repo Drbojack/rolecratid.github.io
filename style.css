@@ -227,89 +227,116 @@ button.btn.btn-secondary {
 }
 
 
-/* ===============================
-   Results layout (JS untouched)
-   =============================== */
 
-.results-page{
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px 48px;
+
+.card {
+  transition: opacity 0.2s ease;
 }
 
-/* two-column layout like rolecraftid.com */
-.results-layout{
+.card.is-fading {
+  opacity: 0;
+}
+
+
+
+/* ===============================
+   Results + scroll + fade (FINAL)
+   =============================== */
+
+#resultsPage { display: none; }
+
+body.show-results #resultsPage {
+  display: block;
+}
+
+body.show-results .card {
+  max-width: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.results-inner {
+  padding: 0 20px 64px; /* 🔥 remove top padding */
+}
+
+
+.results-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 48px;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 64px;
   align-items: flex-start;
 }
 
-/* left column */
-.results-left{
+
+
+.results-left {
   display: flex;
+  align-items: flex-start; /* 🔑 key fix */
+}
+
+
+.results-visual {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 18px;
+  background: transparent;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.results-visual{
+.results-visual img {
   width: 100%;
-  max-width: 260px;
-  min-height: 260px;
+  height: auto;
   border-radius: 18px;
-  background: rgba(17,24,39,.04);
 }
 
-/* right column typography */
-.results-right h2{
-  font-size: 32px;
-  margin: 0 0 12px;
-  line-height: 1.2;
+.results-right {
+  padding-top: 0;
 }
 
-.results-headline{
+.results-right h2 {
+  margin-top: 0; /* 🔥 critical */
+}
+
+
+.results-right p {
+  max-width: 900px;
+  line-height: 1.65;
+}
+
+
+.results-headline {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.results-links{
+.results-links {
   color: var(--muted);
   margin-bottom: 18px;
 }
 
-.results-body{
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-/* mobile */
-@media (max-width: 900px){
-  .results-layout{
+@media (max-width: 900px) {
+  .results-layout {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .results-left{
-    justify-content: flex-start;
+
+  .results-visual {
+    max-width: 220px;
+    margin-bottom: 20px;
   }
 }
 
 
-/* DEFINITIVE single-scroll fix */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
 
-#resultsPage,
-.results-layout,
-.results-left,
-.results-right,
-.card,
-.dialog-inner {
-  overflow: visible !important;
-  max-height: none !important;
+/* Single scrollbar */
+html, body {
+  overflow-x: hidden;
 }
 
 /* Fade animation */
@@ -319,3 +346,23 @@ html, body {
 .card.is-fading {
   opacity: 0;
 }
+
+/* Single-column results layout */
+.results-layout.single-column {
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+}
+
+
+/* Text styling */
+.results-description {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.results-rcid {
+  font-size: 18px;
+  margin: 8px 0 16px;
+}
+
