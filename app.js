@@ -412,8 +412,6 @@ function linkFor(group, name){
 
 /** EMAIL (EmailJS) **/
 function setupEmail(){
-  // Email is sent via the Netlify Function at /.netlify/functions/send-results
-  // (API keys live in Netlify environment variables / Email Integration, not in this file).
   el('sendEmail').disabled = false;
   el('emailStatus').textContent = "";
 
@@ -427,17 +425,18 @@ function setupEmail(){
     el('sendEmail').disabled = true;
     el('emailStatus').textContent = "Sending…";
 
-    try{
+    try {
       const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
+
       const res = await fetch("/.netlify/functions/send-results", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
-          primaryRole: (payload.primaryRoles || []).join(" & "),
-          secondaryCraft: (payload.secondaryCrafts || []).join(" & "),
-          resultsHtml: el('resultsBox').innerHTML,
-          contactUrl: (config.urls.overview && config.urls.overview.contact) ? config.urls.overview.contact : "https://www.rolecraftid.com/contact"
+          primaryRole: (payload.primaryRoles || [])[0],
+          secondaryCraft: (payload.secondaryCrafts || [])[0],
+          roleScores: payload.roleScores || {},
+          craftScores: payload.craftScores || {}
         })
       });
 
@@ -446,15 +445,18 @@ function setupEmail(){
         throw new Error(txt || "Send failed");
       }
 
-      el('emailStatus').textContent = "Sent! Check your inbox (and spam folder just in case).";
+      el('emailStatus').textContent =
+        "Sent! Check your inbox (and spam folder just in case).";
     } catch (err){
       console.error(err);
-      el('emailStatus').textContent = "Couldn’t send email. Please try again.";
+      el('emailStatus').textContent =
+        "Couldn’t send email. Please try again.";
     } finally {
       el('sendEmail').disabled = false;
     }
-	  });
+  });
 }
+
 
 
 
