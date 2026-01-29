@@ -1,4 +1,4 @@
-import sgMail from "@sendgrid/mail";
+const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -208,7 +208,7 @@ const SDP_BULLETS = [
    NETLIFY FUNCTION
    ====================== */
 
-export async function handler(event) {
+exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
