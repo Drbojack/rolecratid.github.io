@@ -553,6 +553,15 @@ function showResults() {
   const primaryRoles = topKeys(roles10).keys;
   const secondaryCrafts = topKeys(crafts10).keys;
 
+	{
+  email: "you@email.com",
+  primaryRole: "Visionary Exhorter",
+  secondaryCraft: "Engager",
+  roleScores: { ... },
+  craftScores: { ... }
+}
+
+
   el('resultsBox').innerHTML = `
   <div class="results-inner">
     <div class="results-layout single-column">
