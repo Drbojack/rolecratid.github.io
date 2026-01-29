@@ -229,72 +229,137 @@ export async function handler(event) {
     .join("");
 
   const html = `
-    <p>Hello,</p>
+      <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
+        <p>Hello</p>
 
-    <p>
-      Thank you for completing the RoleCraft ID personality test.
-      Based on your responses, your RoleCraft Identity (RCID) is:
-    </p>
+        <p>
+          Thank you for completing the RoleCraft ID personality test. Based on your responses, your RoleCraft Identity (RCID) is:
+          <br/>
+          <strong>${escapeHtml(primaryRole)} / ${escapeHtml(secondaryCraft)}</strong>
+        </p>
 
-    <h2>
-      <a href="${role.url}">${primaryRole}</a> /
-      <a href="${craft.url}">${secondaryCraft}</a>
-    </h2>
+        <p>
+          This reflects how you are intrinsically motivated to contribute and how that contribution tends to show up in action.
+          Below is a brief overview of each part of your profile, with links if you’d like to explore further.
+        </p>
 
-    <h3>Your Primary Role: ${primaryRole}</h3>
-    <p>${role.summary}</p>
-    <ul>${role.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        <hr/>
 
-    <h4>Role Scores</h4>
-    <ul>${roleScoreList}</ul>
+        <h3>Your Primary Role: ${escapeHtml(primaryRole)}</h3>
 
-    <p>
-      Learn more about your role:
-      <a href="${role.url}">${role.url}</a>
-    </p>
+        <p>Your Primary Role represents your core intrinsic contribution pattern.</p>
 
-    <h3>Your Secondary Craft: ${secondaryCraft}</h3>
-    <p>${craft.summary}</p>
-    <ul>${craft.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+        <p>
+          People who express the ${escapeHtml(primaryRole)} strongly are often recognized for the way they consistently influence outcomes,
+          especially under pressure or ambiguity.
+        </p>
 
-    <h4>Craft Scores</h4>
-    <ul>${craftScoreList}</ul>
+        <ul>
+          ${asList(ROLE_BULLETS[primaryRole])}
+        </ul>
 
-    <p>
-      Explore your craft:
-      <a href="${craft.url}">${craft.url}</a>
-    </p>
+        <p><strong>Here is how you scored across all Roles:</strong></p>
+        <ol>
+          ${formatScoresRole(roleScores)}
+        </ol>
 
-    <h3>Your Self-Determination Priorities</h3>
-    <ol>${SDP_BULLETS.map(b => `<li>${b}</li>`).join("")}</ol>
+        <p>
+          Learn more about the
+          <a href="${ROLE_URLS[primaryRole]}" target="_blank" rel="noopener noreferrer">${escapeHtml(primaryRole)}</a>
+        </p>
 
-    <p>
-      Learn more about your results:
-      <a href="https://www.rolecraftid.com/results-overview">
-        https://www.rolecraftid.com/results-overview
-      </a>
-    </p>
+        <hr/>
 
-    <p>
-      Your RoleCraftID is not a label or limitation.
-      It’s a tool for awareness and choice.
-    </p>
+        <h3>Your Secondary Craft: ${escapeHtml(secondaryCraft)}</h3>
 
-    <p>
-      <strong>The RoleCraftID Team</strong><br/>
-      <a href="https://www.rolecraftid.com">RoleCraftID.com</a>
-    </p>
-  `;
+        <p>Your Craft describes how your Role tends to express itself in practice.</p>
 
-  await sgMail.send({
-    to: email,
-    from: "hello@rolecraftid.com", // must be verified in SendGrid
-    subject: "Your RoleCraftID Results",
-    html
-  });
+        <p>
+          The ${escapeHtml(secondaryCraft)} Craft shapes your default way of acting, responding, and engaging once something matters to you.
+        </p>
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ success: true })
-  };
+        <ul>
+          ${asList(CRAFT_BULLETS[secondaryCraft])}
+        </ul>
+
+        <p><strong>Here is how you scored across all Crafts:</strong></p>
+        <ol>
+          ${formatScoresCraft(craftScores)}
+        </ol>
+
+        <p>
+          Explore the
+          <a href="${CRAFT_URLS[secondaryCraft]}" target="_blank" rel="noopener noreferrer">${escapeHtml(secondaryCraft)}</a>
+          Craft
+        </p>
+
+        <hr/>
+
+        <h3>Your Self-Determination Priorities (SDP)</h3>
+
+        <p>
+          Your motivation is sustained by a specific mix of psychological drivers.
+          Based on your assessment, your priorities rank as follows:
+        </p>
+
+        <ol>
+          <li>${escapeHtml(sdp[0])}</li>
+          <li>${escapeHtml(sdp[1])}</li>
+          <li>${escapeHtml(sdp[2])}</li>
+        </ol>
+
+        <p>
+          These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
+        </p>
+
+        <p>
+          Learn more about your SDP profile:
+          <a href="${resultsOverviewUrl}" target="_blank" rel="noopener noreferrer">results overview</a>
+        </p>
+
+        <hr/>
+
+        <h3>What to Do Next</h3>
+
+        <p>
+          Your RoleCraftID is not a label or limitation. It’s a tool for awareness and choice—one that becomes more useful as you apply it to real decisions, roles, and challenges.
+        </p>
+
+        <p>On the RoleCraft site, you’ll find:</p>
+        <ul>
+          <li>Deeper explanations of Roles and Crafts</li>
+          <li>Examples from real and fictional profiles</li>
+          <li>Campaigns and scenarios where your RCID can be applied</li>
+        </ul>
+
+        <p>
+          Continue exploring your RoleCraftID:
+          <a href="${resultsOverviewUrl}" target="_blank" rel="noopener noreferrer">results overview</a>
+        </p>
+
+        <p>
+          Thank you for taking the assessment. We’re glad you’re here.
+        </p>
+
+        <p>
+          <strong>The RoleCraftID Team</strong><br/>
+          <a href="https://www.rolecraftid.com" target="_blank" rel="noopener noreferrer">RoleCraftID.com</a>
+        </p>
+
+        <p><em>P.S. Feel free to share this with your friends and colleagues.</em></p>
+      </div>
+    `;
+
+    await sgMail.send({
+      to: email,
+      from: "hello@rolecraftid.com",
+      subject: "Your RoleCraftID Results",
+      html
+    });
+
+    return { statusCode: 200, body: "Email sent" };
+  } catch (err) {
+    console.error(err);
+    return { statusCode: 500, body: "Email failed" };
+  }
 }
