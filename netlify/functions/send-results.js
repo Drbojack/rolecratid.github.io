@@ -2,6 +2,24 @@ import sgMail from "@sendgrid/mail";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const clamp = (n, min = 0, max = 10) =>
+  Math.min(max, Math.max(min, Number(n) || 0));
+
+const round1 = (n) => Math.round(n * 10) / 10;
+
+/**
+ * Normalize raw scores to /10
+ * If your raw scores already ARE /10, this just cleans them.
+ */
+const normalizeScores = (scores = {}) => {
+  const out = {};
+  for (const [key, value] of Object.entries(scores)) {
+    out[key] = round1(clamp(value));
+  }
+  return out;
+};
+
+
 /* ======================
    ROLE + CRAFT CONTENT
    ====================== */
@@ -203,6 +221,11 @@ export async function handler(event) {
     craftScores = {}
   } = JSON.parse(event.body || "{}");
 
+     const normalizedRoleScores = normalizeScores(roleScores);
+  const normalizedCraftScores = normalizeScores(craftScores);
+   
+   
+
   if (!email || !primaryRole || !secondaryCraft) {
     return {
       statusCode: 400,
@@ -220,11 +243,11 @@ export async function handler(event) {
     };
   }
 
-  const roleScoreList = Object.entries(roleScores)
+  const roleScoreList = Object.entries(normalizedRoleScores)
     .map(([k, v]) => `<li>${k}: ${v} / 10</li>`)
     .join("");
 
-  const craftScoreList = Object.entries(craftScores)
+  const craftScoreList = Object.entries(normalizedCraftScores)
     .map(([k, v]) => `<li>${k}: ${v} / 10</li>`)
     .join("");
 
@@ -260,7 +283,7 @@ export async function handler(event) {
 
         <p><strong>Here is how you scored across all Roles:</strong></p>
         <ol>
-          ${formatScoresRole(roleScores)}
+          ${formatScoresRole(normalizedRoleScores)}
         </ol>
 
         <p>
@@ -284,7 +307,7 @@ export async function handler(event) {
 
         <p><strong>Here is how you scored across all Crafts:</strong></p>
         <ol>
-          ${formatScoresCraft(craftScores)}
+          ${formatScoresCraft(normalizedCraftScores)}
         </ol>
 
         <p>
