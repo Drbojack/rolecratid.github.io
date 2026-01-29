@@ -7,61 +7,178 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
    ====================== */
 
 const ROLE_CONTENT = {
-  "Insightful Prophet": {
-    summary: `
-      You are naturally attuned to strategic truth, integrity, and long-term consequences.
-      You tend to notice misalignment early—especially when vision, mission, or values
-      don’t match actual behavior.
-    `,
+  "Visionary Prophet ID": {
+    title: "The Visionary Prophet",
     bullets: [
-      "You often sense when something is off before others can articulate it.",
-      "You bring clarity by naming uncomfortable realities.",
-      "You are driven by alignment between truth, values, and action."
+      "Detect truth and principle misalignment early",
+      "Identify and name uncomfortable realities",
+      "Anchor integrity and standards",
+      "Cut to root causes for solutions",
+      "Disrupt denial and strategic drift",
+      "Risk bluntness or isolation",
+      "Mature through timing and restraint"
     ],
     url: "https://www.rolecraftid.com/prophet"
   },
 
-  "Visionary Exhorter": {
-    summary: `
-      You energize people toward possibility and movement.
-      You help others see what could be and motivate them to step into it.
-    `,
+  "Humble Servant ID": {
+    title: "The Humble Servant",
     bullets: [
-      "You naturally inspire momentum and engagement.",
-      "You help people reframe obstacles into opportunities.",
-      "You act as a catalyst for forward movement."
+      "Notice strain and unmet needs",
+      "Fill gaps to keep work moving",
+      "Sustain people systems, especially leadership",
+      "Bring reliability under pressure",
+      "Prevent quiet breakdown",
+      "Risk overextension or invisibility",
+      "Mature through boundaries and structure"
+    ],
+    url: "https://www.rolecraftid.com/servant"
+  },
+
+  "Learned Teacher ID": {
+    title: "The Learned Teacher",
+    bullets: [
+      "Detect confusion and weak understanding",
+      "Clarify logic and assumptions",
+      "Build transferable competence",
+      "Create shared language",
+      "Raise decision quality and precision",
+      "Risk over-explaining or slowing action",
+      "Mature by teaching just enough and taking responsibility"
+    ],
+    url: "https://www.rolecraftid.com/teacher"
+  },
+
+  "Visionary Exhorter ID": {
+    title: "The Visionary Exhorter",
+    bullets: [
+      "Detect stalled social momentum",
+      "Inspire belief and energy in the vision",
+      "Reframe setbacks into movement",
+      "Encourage and communicate",
+      "Build resilience in required change",
+      "Risk premature optimism or social burnout",
+      "Mature through grounded encouragement"
     ],
     url: "https://www.rolecraftid.com/exhorter"
+  },
+
+  "Trusted Steward ID": {
+    title: "The Trusted Steward",
+    bullets: [
+      "Detect resource overextension and risk to ROI",
+      "Fill needed capacity with versatility",
+      "Optimize for trusted sustainability",
+      "Remain disciplined despite ideological differences",
+      "Ensure long-term viability of initiatives",
+      "Risk over-caution or control",
+      "Mature by balancing protection and release"
+    ],
+    url: "https://www.rolecraftid.com/steward"
+  },
+
+  "Organized Leader ID": {
+    title: "The Organized Leader",
+    bullets: [
+      "Detect suboptimal system productivity",
+      "Clarify roles and ownership",
+      "Design executable systems for scale",
+      "Coordinate people and process",
+      "Enable productive scale by teams",
+      "Risk over-control or centralization",
+      "Mature through distributed order and compassion"
+    ],
+    url: "https://www.rolecraftid.com/leader"
+  },
+
+  "Mindful Mercy ID": {
+    title: "The Mindful Mercy",
+    bullets: [
+      "Intuit emotional misalignment",
+      "Restore safety and dignity for excellence",
+      "De-escalate mis attach conflict",
+      "Align systems into ecosystems",
+      "Build deep human connection",
+      "Risk boundary loss through sacrifice or avoidance",
+      "Mature through compassionate limits"
+    ],
+    url: "https://www.rolecraftid.com/mercy"
   }
-  // add remaining roles here
 };
 
+
 const CRAFT_CONTENT = {
-  "Engager": {
-    summary: `
-      You activate people through connection, presence, and relational momentum.
-    `,
+  "Activator ID": {
+    title: "Activator",
     bullets: [
-      "You draw others into meaningful participation.",
-      "You build trust through interaction.",
-      "You help ideas move through people, not just systems."
+      "Initiate and invite others into action quickly",
+      "Break inertia",
+      "Learn by doing and empowering",
+      "Create early momentum",
+      "Thrive in uncertainty",
+      "Risk premature starts",
+      "Mature through intentional handoff"
+    ],
+    url: "https://www.rolecraftid.com/activator"
+  },
+
+  "Perceiver ID": {
+    title: "Perceiver",
+    bullets: [
+      "Sense hidden strategic signals",
+      "Read deeper patterns and timing",
+      "Detect shifts beneath the data",
+      "Improve judgment, especially leaders",
+      "Prevent blind spots in popular opinion",
+      "Risk over-internalizing insight",
+      "Mature by translating signals"
+    ],
+    url: "https://www.rolecraftid.com/perceiver"
+  },
+
+  "Engager ID": {
+    title: "Engager",
+    bullets: [
+      "Build trust and belief quickly",
+      "Help ideas land for commitment",
+      "Create relational momentum",
+      "Increase buy-in",
+      "Humanize change",
+      "Risk people-pleasing or fatigue",
+      "Mature through anchored connection in truth"
     ],
     url: "https://www.rolecraftid.com/engager"
   },
 
-  "Perceiver": {
-    summary: `
-      You notice subtle patterns, signals, and shifts that others miss.
-    `,
+  "Safekeeper ID": {
+    title: "Safekeeper",
     bullets: [
-      "You detect nuance early.",
-      "You respond intuitively to emerging dynamics.",
-      "You operate through observation and pattern recognition."
+      "Protect connection, capacity, and community",
+      "Notice burnout",
+      "Create safety",
+      "Advocate for sustainable pace",
+      "Preserve trust over time",
+      "Risk over-protection",
+      "Mature through shared care"
     ],
-    url: "https://www.rolecraftid.com/perceiver"
+    url: "https://www.rolecraftid.com/safekeeper"
+  },
+
+  "Trainer ID": {
+    title: "Trainer",
+    bullets: [
+      "Simplify understanding",
+      "Turn insight into method",
+      "Raise shared competence",
+      "Reduce dependency",
+      "Scale capability",
+      "Risk over-structuring",
+      "Mature by pairing learning with action"
+    ],
+    url: "https://www.rolecraftid.com/trainer"
   }
-  // add remaining crafts here
 };
+
 
 const SDP_BULLETS = [
   "Autonomy – acting with internal alignment rather than external pressure.",
