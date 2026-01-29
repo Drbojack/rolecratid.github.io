@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
    ====================== */
 
 const ROLE_CONTENT = {
-  "Visionary Prophet ID": {
+  "Visionary Prophet": {
     title: "The Visionary Prophet",
     bullets: [
       "Detect truth and principle misalignment early",
@@ -21,7 +21,7 @@ const ROLE_CONTENT = {
     url: "https://www.rolecraftid.com/prophet"
   },
 
-  "Humble Servant ID": {
+  "Humble Servant": {
     title: "The Humble Servant",
     bullets: [
       "Notice strain and unmet needs",
@@ -35,7 +35,7 @@ const ROLE_CONTENT = {
     url: "https://www.rolecraftid.com/servant"
   },
 
-  "Learned Teacher ID": {
+  "Learned Teacher": {
     title: "The Learned Teacher",
     bullets: [
       "Detect confusion and weak understanding",
@@ -49,7 +49,7 @@ const ROLE_CONTENT = {
     url: "https://www.rolecraftid.com/teacher"
   },
 
-  "Visionary Exhorter ID": {
+  "Visionary Exhorter": {
     title: "The Visionary Exhorter",
     bullets: [
       "Detect stalled social momentum",
@@ -63,7 +63,7 @@ const ROLE_CONTENT = {
     url: "https://www.rolecraftid.com/exhorter"
   },
 
-  "Trusted Steward ID": {
+  "Trusted Steward": {
     title: "The Trusted Steward",
     bullets: [
       "Detect resource overextension and risk to ROI",
@@ -77,7 +77,7 @@ const ROLE_CONTENT = {
     url: "https://www.rolecraftid.com/steward"
   },
 
-  "Organized Leader ID": {
+  "Organized Leader": {
     title: "The Organized Leader",
     bullets: [
       "Detect suboptimal system productivity",
@@ -91,7 +91,7 @@ const ROLE_CONTENT = {
     url: "https://www.rolecraftid.com/leader"
   },
 
-  "Mindful Mercy ID": {
+  "Mindful Mercy": {
     title: "The Mindful Mercy",
     bullets: [
       "Intuit emotional misalignment",
@@ -108,7 +108,7 @@ const ROLE_CONTENT = {
 
 
 const CRAFT_CONTENT = {
-  "Activator ID": {
+  "Activator": {
     title: "Activator",
     bullets: [
       "Initiate and invite others into action quickly",
@@ -122,7 +122,7 @@ const CRAFT_CONTENT = {
     url: "https://www.rolecraftid.com/activator"
   },
 
-  "Perceiver ID": {
+  "Perceiver": {
     title: "Perceiver",
     bullets: [
       "Sense hidden strategic signals",
@@ -136,7 +136,7 @@ const CRAFT_CONTENT = {
     url: "https://www.rolecraftid.com/perceiver"
   },
 
-  "Engager ID": {
+  "Engager": {
     title: "Engager",
     bullets: [
       "Build trust and belief quickly",
@@ -150,7 +150,7 @@ const CRAFT_CONTENT = {
     url: "https://www.rolecraftid.com/engager"
   },
 
-  "Safekeeper ID": {
+  "Safekeeper": {
     title: "Safekeeper",
     bullets: [
       "Protect connection, capacity, and community",
@@ -164,7 +164,7 @@ const CRAFT_CONTENT = {
     url: "https://www.rolecraftid.com/safekeeper"
   },
 
-  "Trainer ID": {
+  "Trainer": {
     title: "Trainer",
     bullets: [
       "Simplify understanding",
