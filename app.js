@@ -436,7 +436,7 @@ function setupEmail(){
           primaryRole: (payload.primaryRoles || [])[0],
           secondaryCraft: (payload.secondaryCrafts || [])[0],
           roleScores: payload.roleScores || {},
-          craftScores: payload.craftScores || {}
+          craftScores: payload.craftScores || {},
 			sdpPriorities: payload.sdpPriorities || []
 
         })
