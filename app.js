@@ -553,13 +553,12 @@ function showResults() {
   const primaryRoles = topKeys(roles10).keys;
   const secondaryCrafts = topKeys(crafts10).keys;
 
-	{
-  email: "you@email.com",
-  primaryRole: "Visionary Exhorter",
-  secondaryCraft: "Engager",
-  roleScores: { ... },
-  craftScores: { ... }
-}
+	 el('resultsBox').dataset.payload = JSON.stringify({
+    primaryRoles,
+    secondaryCrafts,
+    roleScores: state.totals.roles,
+    craftScores: state.totals.crafts
+  });
 
 
   el('resultsBox').innerHTML = `
