@@ -209,39 +209,32 @@ const SDP_BULLETS = [
    ====================== */
 
 exports.handler = async function (event) {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
+  try {
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
+    }
 
-  const {
-    email,
-    primaryRole,
-    secondaryCraft,
-    roleScores = {},
-    craftScores = {}
-  } = JSON.parse(event.body || "{}");
+    const {
+      email,
+      primaryRole,
+      secondaryCraft,
+      roleScores = {},
+      craftScores = {}
+    } = JSON.parse(event.body || "{}");
 
-     const normalizedRoleScores = normalizeScores(roleScores);
-  const normalizedCraftScores = normalizeScores(craftScores);
-   
-   
+    const normalizedRoleScores = normalizeScores(roleScores);
+    const normalizedCraftScores = normalizeScores(craftScores);
 
-  if (!email || !primaryRole || !secondaryCraft) {
-    return {
-      statusCode: 400,
-      body: "Missing required fields"
-    };
-  }
+    if (!email || !primaryRole || !secondaryCraft) {
+      return { statusCode: 400, body: "Missing required fields" };
+    }
 
-  const role = ROLE_CONTENT[primaryRole];
-  const craft = CRAFT_CONTENT[secondaryCraft];
+    const role = ROLE_CONTENT[primaryRole];
+    const craft = CRAFT_CONTENT[secondaryCraft];
 
-  if (!role || !craft) {
-    return {
-      statusCode: 400,
-      body: "Unknown role or craft"
-    };
-  }
+    if (!role || !craft) {
+      return { statusCode: 400, body: "Unknown role or craft" };
+    }
 
   const roleScoreList = Object.entries(normalizedRoleScores)
     .map(([k, v]) => `<li>${k}: ${v} / 10</li>`)
@@ -373,7 +366,7 @@ exports.handler = async function (event) {
       </div>
     `;
 
-    await sgMail.send({
+   await sgMail.send({
       to: email,
       from: "hello@rolecraftid.com",
       subject: "Your RoleCraftID Results",
@@ -381,8 +374,9 @@ exports.handler = async function (event) {
     });
 
     return { statusCode: 200, body: "Email sent" };
+
   } catch (err) {
     console.error(err);
     return { statusCode: 500, body: "Email failed" };
   }
-}
+};
