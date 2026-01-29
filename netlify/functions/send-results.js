@@ -11,6 +11,15 @@ function escapeHtml(str = "") {
     .replace(/'/g, "&#39;");
 }
 
+function asList(items = []) {
+  if (!Array.isArray(items) || items.length === 0) return "";
+  return `
+    <ul>
+      ${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+    </ul>
+  `;
+}
+
 const clamp = (n, min = 0, max = 10) =>
   Math.min(max, Math.max(min, Number(n) || 0));
 
