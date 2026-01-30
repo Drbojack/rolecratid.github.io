@@ -384,14 +384,15 @@ const sdp = Object.entries(normalizedSDP)
           Based on your assessment, your priorities rank as follows:
         </p>
 <ol>
- ${sdp.map(item => `
-  <li>
-    <a href="${item.url}" target="_blank">
-      ${escapeHtml(item.label)}
-    </a>
-  </li>
-`).join("")}
+  ${sdp.map(item => `
+    <li>
+      <a href="${item.url}" target="_blank">
+        ${escapeHtml(item.label)}
+      </a>
+    </li>
+  `).join("")}
 </ol>
+
         <p>
           These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
         </p>
