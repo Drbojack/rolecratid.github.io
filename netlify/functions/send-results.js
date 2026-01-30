@@ -287,15 +287,15 @@ const formatScoresCraft = scores =>
   </li>`;
 }).join("");
 const SDP_CONTENT = {
-  Freedom: {
+  Autonomy: {
     label: "Freedom – acting with internal alignment rather than external pressure.",
     url: "https://www.rolecraftid.com/freedom"
   },
-  Mastery: {
+  Competence: {
     label: "Mastery – refining your sense-making and contribution.",
     url: "https://www.rolecraftid.com/mastery"
   },
-  Meaning: {
+  Relatedness: {
     label: "Meaning – engaging others meaningfully without losing clarity.",
     url: "https://www.rolecraftid.com/meaning"
   }
