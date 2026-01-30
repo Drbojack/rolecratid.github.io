@@ -30,12 +30,16 @@ const round1 = (n) => Math.round(n * 10) / 10;
  * If your raw scores already ARE /10, this just cleans them.
  */
 const normalizeScores = (scores = {}) => {
+  const values = Object.values(scores);
+  const max = Math.max(...values, 1);
+
   const out = {};
   for (const [key, value] of Object.entries(scores)) {
-    out[key] = round1(clamp(value));
+    out[key] = Math.round((value / max) * 10 * 10) / 10;
   }
   return out;
 };
+
 
 
 /* ======================
@@ -267,12 +271,24 @@ exports.handler = async function (event) {
 
     const formatScoresRole = scores =>
   Object.entries(scores)
-    .map(([name, score]) => `<li>${escapeHtml(name)}: ${score} / 10</li>`)
+    .map(([name, score]) => {
+  const url = ROLE_CONTENT[name]?.url;
+  return `<li>
+    <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
+  </li>`;
+})
+
     .join("");
 
 const formatScoresCraft = scores =>
   Object.entries(scores)
-    .map(([name, score]) => `<li>${escapeHtml(name)}: ${score} / 10</li>`)
+    .map(([name, score]) => {
+  const url = CRAFT_CONTENT[name]?.url;
+  return `<li>
+    <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
+  </li>`;
+})
+
     .join("");
 
   const html = `
@@ -360,8 +376,7 @@ const formatScoresCraft = scores =>
         </p>
 
         <p>
-          Learn more about your SDP profile:
-          <a href="${resultsOverviewUrl}" target="_blank" rel="noopener noreferrer">results overview</a>
+          Learn more about your  Continue exploring your <a href="${resultsOverviewUrl}" target="_blank">SDP Profile</a>
         </p>
 
         <hr/>
@@ -380,8 +395,8 @@ const formatScoresCraft = scores =>
         </ul>
 
         <p>
-          Continue exploring your RoleCraftID:
-          <a href="${resultsOverviewUrl}" target="_blank" rel="noopener noreferrer">results overview</a>
+         Continue exploring your <a href="${resultsOverviewUrl}" target="_blank">RoleCraftID</a>
+
         </p>
 
         <p>
