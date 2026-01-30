@@ -264,6 +264,16 @@ exports.handler = async function (event) {
     .map(([k, v]) => `<li>${k}: ${v} / 10</li>`)
     .join("");
 
+    const formatScoresRole = scores =>
+  Object.entries(scores)
+    .map(([name, score]) => `<li>${escapeHtml(name)}: ${score} / 10</li>`)
+    .join("");
+
+const formatScoresCraft = scores =>
+  Object.entries(scores)
+    .map(([name, score]) => `<li>${escapeHtml(name)}: ${score} / 10</li>`)
+    .join("");
+
   const html = `
       <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
         <p>Hello</p>
