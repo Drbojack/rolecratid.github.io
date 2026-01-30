@@ -311,7 +311,7 @@ const formatScoresCraft = scores =>
 
         <p>
           Learn more about the
-          <a href="${ROLE_URLS[primaryRole]}" target="_blank" rel="noopener noreferrer">${escapeHtml(primaryRole)}</a>
+          <a href="${ROLE_CONTENT[primaryRole]}" target="_blank" rel="noopener noreferrer">${escapeHtml(primaryRole)}</a>
         </p>
 
         <hr/>
@@ -335,7 +335,7 @@ const formatScoresCraft = scores =>
 
         <p>
           Explore the
-          <a href="${CRAFT_URLS[secondaryCraft]}" target="_blank" rel="noopener noreferrer">${escapeHtml(secondaryCraft)}</a>
+          <a href="${CRAFT_CONTENT[secondaryCraft]}" target="_blank" rel="noopener noreferrer">${escapeHtml(secondaryCraft)}</a>
           Craft
         </p>
 
