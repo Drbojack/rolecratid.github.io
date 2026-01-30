@@ -376,8 +376,7 @@ const sdp = Object.entries(normalizedSDP)
           Based on your assessment, your priorities rank as follows:
         </p>
 <ol>
-  ${sdp
-    .map(item => `
+  ${sdp.map(item => `
       <li>
         <a href="${resultsOverviewUrl}" target="_blank">
           ${escapeHtml(item)}
