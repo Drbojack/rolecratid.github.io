@@ -376,7 +376,7 @@ const formatScoresCraft = scores =>
         </p>
 
         <p>
-          Learn more about your  Continue exploring your <a href="${resultsOverviewUrl}" target="_blank">SDP Profile</a>
+         Continue exploring your <a href="${resultsOverviewUrl}" target="_blank">SDP Profile</a>
         </p>
 
         <hr/>
