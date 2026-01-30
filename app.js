@@ -437,7 +437,8 @@ function setupEmail(){
           secondaryCraft: (payload.secondaryCrafts || [])[0],
           roleScores: payload.roleScores || {},
           craftScores: payload.craftScores || {},
-			sdpPriorities: payload.sdpPriorities || []
+			sdpScores: payload.sdpScores || {}
+
 
         })
       });
@@ -559,7 +560,8 @@ function showResults() {
     primaryRoles,
     secondaryCrafts,
     roleScores: state.totals.roles,
-    craftScores: state.totals.crafts
+    craftScores: state.totals.crafts,
+	sdpScores: state.totals.sdt
   });
 
 
