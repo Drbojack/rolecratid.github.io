@@ -424,12 +424,11 @@ function setupEmail(){
 
     el('sendEmail').disabled = true;
     el('emailStatus').textContent = "Sending…";
-console.log("SDP being sent:", payload.sdpScores);
 
     try {
-      const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
-
-      const res = await fetch("/.netlify/functions/send-results", {
+   const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
+   
+		const res = await fetch("/.netlify/functions/send-results", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -553,7 +552,8 @@ function showResults() {
 
   const roles10 = toOutOf10(state.totals.roles, config.maxPoints.roles);
   const crafts10 = toOutOf10(state.totals.crafts, config.maxPoints.crafts);
-
+	const sdp10 = toOutOf10(state.totals.sdt, config.maxPoints.sdt);
+	
   const primaryRoles = topKeys(roles10).keys;
   const secondaryCrafts = topKeys(crafts10).keys;
 
