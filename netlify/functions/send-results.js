@@ -278,8 +278,6 @@ const normalizedCraftScores = normalizeScores(craftScores, CRAFT_RAW_MAX);
   </li>`;
 })
 
-    .join("");
-
 const formatScoresCraft = scores =>
   Object.entries(scores)
     .map(([name, score]) => {
