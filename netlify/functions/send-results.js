@@ -302,14 +302,12 @@ const SDP_CONTENT = {
 };
 
 
-const normalizedSDP = normalizeScores(sdpScores, SDP_RAW_MAX);
+
+const normalizedSDP = sdpScores;
 
 const sdp = Object.entries(normalizedSDP)
   .sort((a, b) => b[1] - a[1])
-  .map(([key]) => {
-    const k = key.charAt(0).toUpperCase() + key.slice(1);
-    return SDP_CONTENT[k];
-  })
+  .map(([key]) => SDP_CONTENT[key])
   .filter(Boolean);
 
 
