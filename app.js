@@ -424,6 +424,7 @@ function setupEmail(){
 
     el('sendEmail').disabled = true;
     el('emailStatus').textContent = "Sending…";
+console.log("SDP being sent:", payload.sdpScores);
 
     try {
       const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
