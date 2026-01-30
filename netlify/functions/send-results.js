@@ -19,26 +19,24 @@ function asList(items = []) {
     </ul>
   `;
 }
+const ROLE_RAW_MAX = 30;
+const CRAFT_RAW_MAX = 24.5;
+const SDP_RAW_MAX = 27.5;
 
-const clamp = (n, min = 0, max = 10) =>
-  Math.min(max, Math.max(min, Number(n) || 0));
 
 const round1 = (n) => Math.round(n * 10) / 10;
 
 /**
- * Normalize raw scores to /10
- * If your raw scores already ARE /10, this just cleans them.
+ * Normalize raw scores to /10 using a theoretical max
  */
-const normalizeScores = (scores = {}) => {
-  const values = Object.values(scores);
-  const max = Math.max(...values, 1);
-
+const normalizeScores = (scores = {}, maxRaw) => {
   const out = {};
   for (const [key, value] of Object.entries(scores)) {
-    out[key] = Math.round((value / max) * 10 * 10) / 10;
+    out[key] = round1((Number(value) / maxRaw) * 10);
   }
   return out;
 };
+
 
 
 
@@ -244,8 +242,9 @@ exports.handler = async function (event) {
       craftScores = {}
     } = JSON.parse(event.body || "{}");
 
-    const normalizedRoleScores = normalizeScores(roleScores);
-    const normalizedCraftScores = normalizeScores(craftScores);
+   const normalizedRoleScores = normalizeScores(roleScores, ROLE_RAW_MAX);
+const normalizedCraftScores = normalizeScores(craftScores, CRAFT_RAW_MAX);
+
 
     if (!email || !primaryRole || !secondaryCraft) {
       return { statusCode: 400, body: "Missing required fields" };
