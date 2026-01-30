@@ -307,8 +307,15 @@ const normalizedSDP = sdpScores;
 
 const sdp = Object.entries(normalizedSDP)
   .sort((a, b) => b[1] - a[1])
-  .map(([key]) => SDP_CONTENT[key])
-  .filter(Boolean);
+.map(([key]) => {
+  const normalizedKey =
+    key.includes("Autonomy") ? "Autonomy" :
+    key.includes("Competence") ? "Competence" :
+    key.includes("Relatedness") ? "Relatedness" :
+    null;
+
+  return normalizedKey ? SDP_CONTENT[normalizedKey] : null;
+})
 
 
 
