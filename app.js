@@ -427,7 +427,7 @@ function setupEmail(){
 
     try {
    const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
-   
+   console.log("SDP being sent:", payload.sdpScores);
 		const res = await fetch("/.netlify/functions/send-results", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
