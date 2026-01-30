@@ -297,7 +297,7 @@ exports.handler = async function (event) {
         </p>
 
         <ul>
-          ${asList(ROLE_BULLETS[primaryRole])}
+          ${asList(ROLE_CONTENT[primaryRole])}
         </ul>
 
         <p><strong>Here is how you scored across all Roles:</strong></p>
@@ -321,7 +321,7 @@ exports.handler = async function (event) {
         </p>
 
         <ul>
-          ${asList(CRAFT_BULLETS[secondaryCraft])}
+          ${asList(CRAFT_CONTENT[secondaryCraft])}
         </ul>
 
         <p><strong>Here is how you scored across all Crafts:</strong></p>
