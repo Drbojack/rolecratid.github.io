@@ -254,7 +254,8 @@ exports.handler = async function (event) {
       return { statusCode: 400, body: "Unknown role or craft" };
     }
 
- 
+ const resultsOverviewUrl = "https://www.rolecraftid.com/results-overview";
+
     
   const roleScoreList = Object.entries(normalizedRoleScores)
     .map(([k, v]) => `<li>${k}: ${v} / 10</li>`)
