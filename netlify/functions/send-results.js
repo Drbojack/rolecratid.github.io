@@ -349,9 +349,9 @@ const formatScoresCraft = scores =>
         </p>
 
         <ol>
-          <li>${escapeHtml(sdp[0])}</li>
-          <li>${escapeHtml(sdp[1])}</li>
-          <li>${escapeHtml(sdp[2])}</li>
+          <li>${escapeHtml(SDP_BULLETS[0])}</li>
+          <li>${escapeHtml(SDP_BULLETS[1])}</li>
+          <li>${escapeHtml(SDP_BULLETS[2])}</li>
         </ol>
 
         <p>
