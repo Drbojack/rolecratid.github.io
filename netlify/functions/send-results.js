@@ -314,6 +314,7 @@ const sdp = Object.entries(normalizedSDP)
 
 
 
+console.log("SDP array:", sdp);
 
   const html = `
       <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
@@ -397,8 +398,7 @@ const sdp = Object.entries(normalizedSDP)
     </li>
   `).join("")}
 </ol>
-
-        <p>
+     <p>
           These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
         </p>
 
