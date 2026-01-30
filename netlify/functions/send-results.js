@@ -254,13 +254,7 @@ exports.handler = async function (event) {
       return { statusCode: 400, body: "Unknown role or craft" };
     }
 
-    const roleBullets = (ROLE_BULLETS[primaryRole] || [])
-      .map(b => `<li>${b}</li>`)
-      .join("");
-
-    const craftBullets = (CRAFT_BULLETS[secondaryCraft] || [])
-      .map(b => `<li>${b}</li>`)
-      .join("");
+ 
     
   const roleScoreList = Object.entries(normalizedRoleScores)
     .map(([k, v]) => `<li>${k}: ${v} / 10</li>`)
