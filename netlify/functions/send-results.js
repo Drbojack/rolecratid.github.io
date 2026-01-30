@@ -276,8 +276,8 @@ const normalizedCraftScores = normalizeScores(craftScores, CRAFT_RAW_MAX);
   return `<li>
     <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
   </li>`;
-})
-
+}).join("");
+    
 const formatScoresCraft = scores =>
   Object.entries(scores)
     .map(([name, score]) => {
@@ -285,7 +285,7 @@ const formatScoresCraft = scores =>
   return `<li>
     <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
   </li>`;
-})
+}).join("");
 const SDP_LABELS = {
   Autonomy: "Autonomy – acting with internal alignment rather than external pressure.",
   Competence: "Competence – refining your sense-making and contribution.",
@@ -298,7 +298,7 @@ const sdp = Object.entries(normalizedSDP)
   .sort((a, b) => b[1] - a[1])   // highest first
   .map(([key]) => SDP_LABELS[key]);
 
-    .join("");
+
 
   const html = `
       <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
