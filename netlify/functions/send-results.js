@@ -377,16 +377,13 @@ const sdp = Object.entries(normalizedSDP)
         </p>
 <ol>
   ${sdp.map(item => `
-      <li>
-        <a href="${resultsOverviewUrl}" target="_blank">
-          ${escapeHtml(item)}
-        </a>
-      </li>
-    `)
-    .join("")}
+    <li>
+      <a href="${resultsOverviewUrl}" target="_blank">
+        ${escapeHtml(item)}
+      </a>
+    </li>
+  `).join("")}
 </ol>
-
-
         <p>
           These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
         </p>
