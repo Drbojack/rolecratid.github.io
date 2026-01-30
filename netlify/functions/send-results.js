@@ -286,17 +286,27 @@ const formatScoresCraft = scores =>
     <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
   </li>`;
 }).join("");
-const SDP_LABELS = {
-  Autonomy: "Autonomy – acting with internal alignment rather than external pressure.",
-  Competence: "Competence – refining your sense-making and contribution.",
-  Relatedness: "Relatedness – engaging others meaningfully without losing clarity."
+const SDP_CONTENT = {
+  Freedom: {
+    label: "Freedom – acting with internal alignment rather than external pressure.",
+    url: "https://www.rolecraftid.com/freedom"
+  },
+  Mastery: {
+    label: "Mastery – refining your sense-making and contribution.",
+    url: "https://www.rolecraftid.com/mastery"
+  },
+  Meaning: {
+    label: "Meaning – engaging others meaningfully without losing clarity.",
+    url: "https://www.rolecraftid.com/meaning"
+  }
 };
+
 
 const normalizedSDP = normalizeScores(sdpScores, SDP_RAW_MAX);
 
 const sdp = Object.entries(normalizedSDP)
   .sort((a, b) => b[1] - a[1])   // highest first
-  .map(([key]) => SDP_LABELS[key]);
+  .map(([key]) => SDP_CONTENT[key]);
 
 
 
@@ -374,13 +384,13 @@ const sdp = Object.entries(normalizedSDP)
           Based on your assessment, your priorities rank as follows:
         </p>
 <ol>
-  ${sdp.map(item => `
-    <li>
-      <a href="${resultsOverviewUrl}" target="_blank">
-        ${escapeHtml(item)}
-      </a>
-    </li>
-  `).join("")}
+ ${sdp.map(item => `
+  <li>
+    <a href="${item.url}" target="_blank">
+      ${escapeHtml(item.label)}
+    </a>
+  </li>
+`).join("")}
 </ol>
         <p>
           These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
