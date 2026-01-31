@@ -584,17 +584,7 @@ function showResults() {
       detailed role insights, development guidance, and application examples.
     </p>
 
-    <div class="results-email">
-      <label for="emailInput"><strong>Email:</strong></label>
-      <input
-        type="email"
-        id="emailInput"
-        placeholder="you@example.com"
-        required
-      />
-      <button id="sendEmail">Send my report</button>
-      <p id="emailStatus" class="email-status"></p>
-    </div>
+  <div id="emailMount"></div>
 
     <p class="results-consent">
       By requesting your report, you agree to receive follow-up communications
@@ -605,6 +595,13 @@ function showResults() {
   </div>
 `;
 
+const emailSection = document.getElementById('emailSection');
+const emailMount = document.getElementById('emailMount');
+
+if (emailSection && emailMount) {
+  emailMount.appendChild(emailSection);
+  emailSection.style.display = 'block';
+}
 
 const baseRole = Object.keys(ROLE_IMAGES).find(role =>
   primaryRoles[0].includes(role)
