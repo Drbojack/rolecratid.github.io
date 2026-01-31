@@ -605,7 +605,6 @@ function showResults() {
   </div>
 `;
 
-const visualEl = document.querySelector('.results-visual');
 
 const baseRole = Object.keys(ROLE_IMAGES).find(role =>
   primaryRoles[0].includes(role)
