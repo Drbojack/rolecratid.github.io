@@ -322,16 +322,21 @@ const sdp = Object.entries(normalizedSDP)
 // --- render SDP HTML ---
 const sdpHtml = `
 <ol>
-  ${sdp.map(item => `
-    <li>
-      <a href="${item.url}" target="_blank">
-        ${escapeHtml(item.label.split(" – ")[0])}
-      </a>
-      – ${escapeHtml(item.label.split(" – ")[1])}
-    </li>
-  `).join("")}
+  ${sdp.map(item => {
+    const [title, description] = item.label.split(" – ");
+
+    return `
+      <li>
+        <a href="${item.url}" target="_blank">
+          ${escapeHtml(title)}
+        </a>
+        ${description ? ` – ${escapeHtml(description)}` : ""}
+      </li>
+    `;
+  }).join("")}
 </ol>
 `;
+
 
   const html = `
       <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
