@@ -575,7 +575,6 @@ function showResults() {
       <strong>${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}</strong>
     </p>
 
-    <hr />
 
     <h3>Get Your Full RoleCraftID Report</h3>
 
