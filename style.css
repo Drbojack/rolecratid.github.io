@@ -214,7 +214,7 @@ button.btn.btn-secondary {
 #resultsPage p{margin: 10px 0; line-height:1.65;}
 #resultsPage .results-list{margin: 10px 0 0; padding-left: 18px;}
 #resultsPage .results-list li{margin: 6px 0;}
-#resultsPage .sep{margin: 12px 0;}
+#resultsPage .sep{margin: 6px 0;}
 #resultsPage a{text-decoration: underline;}
 
 /* tighten on mobile */
@@ -373,6 +373,10 @@ html, body {
 
 #emailSection .row {
   margin-bottom: 1.25rem;
+}
+
+.results-actions {
+  margin-bottom: 6px;
 }
 
 
