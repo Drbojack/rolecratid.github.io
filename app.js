@@ -566,7 +566,7 @@ function showResults() {
   });
 
 
-  eel('resultsBox').innerHTML = `
+  el('resultsBox').innerHTML = `
   <div class="results-inner">
 
     <h2>Your RoleCraftID is:</h2>
