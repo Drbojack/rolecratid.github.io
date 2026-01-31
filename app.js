@@ -566,39 +566,45 @@ function showResults() {
   });
 
 
-  el('resultsBox').innerHTML = `
+  eel('resultsBox').innerHTML = `
   <div class="results-inner">
-    <div class="results-layout single-column">
-	  <!-- LEFT: IMAGE -->
-      <div class="results-left">
-        <div class="results-visual"></div>
-      </div>
-      <div class="results-right">
-        <h2>Your RoleCraftID Results</h2>
 
-    
-        <p class="results-description">
-          Thank you for completing the RoleCraft ID personality test.
-          Based on your responses, your RoleCraft Identity (RCID) is:
-        </p>
+    <h2>Your RoleCraftID is:</h2>
 
-        <p class="results-rcid">
-          <strong>${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}</strong>
-        </p>
+    <p class="results-rcid">
+      <strong>${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}</strong>
+    </p>
 
-        <p class="results-description">
-          If you would like more information,
-          please get your extended results by email below.
-        </p>
+    <hr />
 
-        <p class="results-description">
-          <a href="https://www.rolecraftid.com/contact">Contact us</a>
-          if you have any questions.
-        </p>
-      </div>
+    <h3>Get Your Full RoleCraftID Report</h3>
+
+    <p class="results-description">
+      Enter your email to receive your complete RoleCraftID report, including
+      detailed role insights, development guidance, and application examples.
+    </p>
+
+    <div class="results-email">
+      <label for="emailInput"><strong>Email:</strong></label>
+      <input
+        type="email"
+        id="emailInput"
+        placeholder="you@example.com"
+        required
+      />
+      <button id="sendEmail">Send my report</button>
+      <p id="emailStatus" class="email-status"></p>
     </div>
+
+    <p class="results-consent">
+      By requesting your report, you agree to receive follow-up communications
+      from RoleCraftID related to your results, updates, and related resources.
+      You can unsubscribe at any time.
+    </p>
+
   </div>
 `;
+
 const visualEl = document.querySelector('.results-visual');
 
 const baseRole = Object.keys(ROLE_IMAGES).find(role =>
