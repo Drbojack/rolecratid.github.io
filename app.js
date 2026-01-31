@@ -603,16 +603,6 @@ if (emailSection && emailMount) {
   emailSection.style.display = 'block';
 }
 
-const baseRole = Object.keys(ROLE_IMAGES).find(role =>
-  primaryRoles[0].includes(role)
-);
-
-if (visualEl && baseRole) {
-  const imgPath = ROLE_IMAGES[baseRole];
-  visualEl.innerHTML = `
-    <img src="${imgPath}" alt="${baseRole} role image">
-  `;
-}
 
 
 
