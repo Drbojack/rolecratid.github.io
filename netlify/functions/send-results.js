@@ -338,6 +338,7 @@ const sdpHtml = `
 `;
 
 
+
   const html = `
       <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
         <p>Hello</p>
@@ -412,14 +413,20 @@ const sdpHtml = `
           Based on your assessment, your priorities rank as follows:
         </p>
 <ol>
-  ${sdp.map(item => `
-    <li>
-      <a href="${sdp.html}" target="_blank">
-        ${escapeHtml(item.label)}
-      </a>
-    </li>
-  `).join("")}
+  ${sdp.map(item => {
+    const [title, description] = item.label.split(" – ");
+
+    return `
+      <li>
+        <a href="${item.url}" target="_blank">
+          ${escapeHtml(title)}
+        </a>
+        ${description ? ` – ${escapeHtml(description)}` : ""}
+      </li>
+    `;
+  }).join("")}
 </ol>
+
      <p>
           These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
         </p>
