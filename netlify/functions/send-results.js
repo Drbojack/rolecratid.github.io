@@ -11,6 +11,13 @@ function escapeHtml(str = "") {
     .replace(/'/g, "&#39;");
 }
 
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*", 
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
+
 function asList(items = []) {
   if (!Array.isArray(items) || items.length === 0) return "";
   return `
@@ -228,10 +235,24 @@ const SDP_BULLETS = [
    NETLIFY FUNCTION
    ====================== */
 
-exports.handler = async function (event) {
+xports.handler = async function (event) {
+
+  // ✅ Handle preflight
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: CORS_HEADERS,
+      body: "",
+    };
+  }
+
   try {
     if (event.httpMethod !== "POST") {
-      return { statusCode: 405, body: "Method Not Allowed" };
+      return {
+        statusCode: 405,
+        headers: CORS_HEADERS,
+        body: "Method Not Allowed",
+      };
     }
 
     const {
@@ -242,6 +263,7 @@ exports.handler = async function (event) {
       craftScores = {},
       sdpScores = {}
     } = JSON.parse(event.body || "{}");
+
 
    const normalizedRoleScores = normalizeScores(roleScores, ROLE_RAW_MAX);
 const normalizedCraftScores = normalizeScores(craftScores, CRAFT_RAW_MAX);
@@ -464,10 +486,18 @@ const sdpHtml = `
       html
     });
 
-    return { statusCode: 200, body: "Email sent" };
+    return {
+      statusCode: 200,
+      headers: CORS_HEADERS,
+      body: "Email sent",
+    };
 
   } catch (err) {
     console.error(err);
-    return { statusCode: 500, body: "Email failed" };
+    return {
+      statusCode: 500,
+      headers: CORS_HEADERS,
+      body: "Email failed",
+    };
   }
 };
