@@ -235,7 +235,7 @@ const SDP_BULLETS = [
    NETLIFY FUNCTION
    ====================== */
 
-xports.handler = async function (event) {
+exports.handler = async function (event) {
 
   // ✅ Handle preflight
   if (event.httpMethod === "OPTIONS") {
