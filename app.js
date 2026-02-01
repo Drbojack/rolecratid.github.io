@@ -436,7 +436,7 @@ el('sendEmail').addEventListener('click', async (e) => {
     }
 
     const res = await fetch(
-  "https://www.rolecraftid.com/.netlify/functions/send-results",
+  "https://rolecraftidt.netlify.app/.netlify/functions/send-results",
   {
     method: "POST",
     headers: { "Content-Type": "application/json" },
