@@ -373,12 +373,7 @@ const sdpHtml = `
         <ol>
           ${formatScoresRole(normalizedRoleScores)}
         </ol>
-
-        <p>
-          Learn more about the
-          <a href="${ROLE_CONTENT[primaryRole]}" target="_blank" rel="noopener noreferrer">${escapeHtml(primaryRole)}</a>
-        </p>
-
+        
         <hr/>
 
         <h3>Your Secondary Craft: ${escapeHtml(secondaryCraft)}</h3>
@@ -397,12 +392,6 @@ const sdpHtml = `
         <ol>
           ${formatScoresCraft(normalizedCraftScores)}
         </ol>
-
-        <p>
-          Explore the
-          <a href="${CRAFT_CONTENT[secondaryCraft]}" target="_blank" rel="noopener noreferrer">${escapeHtml(secondaryCraft)}</a>
-          Craft
-        </p>
 
         <hr/>
 
