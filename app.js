@@ -571,10 +571,29 @@ function showResults() {
 
     <h2>Your RoleCraftID is:</h2>
 
-    <p class="results-rcid">
-      <strong>${primaryRoles.join(' & ')} / ${secondaryCrafts.join(' & ')}</strong>
-    </p>
+  <p>
+    <strong>Primary:</strong>
+    <a href="https://www.rolecraftid.com/${primaryRoles[0].toLowerCase().replace(/\s+/g, '-')}"
+       target="_blank">
+      ${primaryRoles.join(' & ')}
+    </a>
+  </p>
 
+  <p>
+    <strong>Secondary:</strong>
+    <a href="https://www.rolecraftid.com/${secondaryCrafts[0].toLowerCase().replace(/\s+/g, '-')}"
+       target="_blank">
+      ${secondaryCrafts.join(' & ')}
+    </a>
+  </p>
+
+  <p class="muted">
+    Visit our
+    <a href="https://www.rolecraftid.com/results-overview" target="_blank">
+      results page
+    </a>
+    to explore more.
+  </p>
 
     <h3>Get Your Full RoleCraftID Report</h3>
 
