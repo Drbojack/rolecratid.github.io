@@ -436,21 +436,20 @@ el('sendEmail').addEventListener('click', async (e) => {
     }
 
     const res = await fetch(
-      "https://www.rolecraftid.com/.netlify/functions/send-results",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "same-origin",
-        body: JSON.stringify({
-          email,
-          primaryRole: payload.primaryRoles[0],
-          secondaryCraft: payload.secondaryCrafts?.[0],
-          roleScores: payload.roleScores || {},
-          craftScores: payload.craftScores || {},
-          sdpScores: payload.sdpScores || {}
-        })
-      }
-    );
+  "https://www.rolecraftid.com/.netlify/functions/send-results",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email,
+      primaryRole: payload.primaryRoles[0],
+      secondaryCraft: payload.secondaryCrafts?.[0],
+      roleScores: payload.roleScores || {},
+      craftScores: payload.craftScores || {},
+      sdpScores: payload.sdpScores || {}
+    })
+  }
+);
 
     if (!res.ok){
       const txt = await res.text();
