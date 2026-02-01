@@ -415,50 +415,60 @@ function setupEmail(){
   el('sendEmail').disabled = false;
   el('emailStatus').textContent = "";
 
-  el('sendEmail').addEventListener('click', async () => {
-    const email = el('emailInput').value.trim();
-    if (!email){
-      el('emailStatus').textContent = "Please enter an email address.";
-      return;
+el('sendEmail').addEventListener('click', async (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const email = el('emailInput').value.trim();
+  if (!email){
+    el('emailStatus').textContent = "Please enter an email address.";
+    return;
+  }
+
+  el('sendEmail').disabled = true;
+  el('emailStatus').textContent = "Sending…";
+
+  try {
+    const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
+
+    if (!payload.primaryRoles || !payload.primaryRoles.length) {
+      throw new Error("Payload not ready");
     }
 
-    el('sendEmail').disabled = true;
-    el('emailStatus').textContent = "Sending…";
-
-    try {
-   const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
-   console.log("SDP being sent:", payload.sdpScores);
-		const res = await fetch("/.netlify/functions/send-results", {
+    const res = await fetch(
+      "https://www.rolecraftid.com/assessment",
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           email,
-          primaryRole: (payload.primaryRoles || [])[0],
-          secondaryCraft: (payload.secondaryCrafts || [])[0],
+          primaryRole: payload.primaryRoles[0],
+          secondaryCraft: payload.secondaryCrafts?.[0],
           roleScores: payload.roleScores || {},
           craftScores: payload.craftScores || {},
-			sdpScores: payload.sdpScores || {}
-
-
+          sdpScores: payload.sdpScores || {}
         })
-      });
-
-      if (!res.ok){
-        const txt = await res.text();
-        throw new Error(txt || "Send failed");
       }
+    );
 
-      el('emailStatus').textContent =
-        "Sent! Check your inbox (and spam folder just in case).";
-    } catch (err){
-      console.error(err);
-      el('emailStatus').textContent =
-        "Couldn’t send email. Please try again.";
-    } finally {
-      el('sendEmail').disabled = false;
+    if (!res.ok){
+      const txt = await res.text();
+      throw new Error(txt || "Send failed");
     }
-  });
-}
+
+    el('emailStatus').textContent =
+      "Sent! Check your inbox (and spam folder just in case).";
+
+  } catch (err){
+    console.error("Email send error:", err);
+    el('emailStatus').textContent =
+      "Couldn’t send email. Please try again.";
+  } finally {
+    el('sendEmail').disabled = false;
+  }
+});
+
 
 
 
