@@ -364,9 +364,7 @@ const sdpHtml = `
 const html = `
   <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #111;">
 
-    <p>Hello,</p>
-
-    <p>
+  <p>
       Thank you for completing the RoleCraftID personality test. Based on your responses,
       your RoleCraft Identity (RCID) is:
     </p>
