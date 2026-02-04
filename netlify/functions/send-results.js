@@ -2,6 +2,8 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const fetch = require("node-fetch");
+
 function escapeHtml(str = "") {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -516,12 +518,32 @@ const html = `
 `;
 
 
-   await sgMail.send({
-      to: email,
-      from: "hello@rolecraftid.com",
-      subject: "Your RoleCraftID Results",
-      html
-    });
+  await sgMail.send({
+  to: email,
+  cc: ccEmail || undefined,
+  from: "hello@rolecraftid.com",
+  subject: "Your RoleCraftID Results",
+  html
+});
+
+await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`, {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.AIRTABLE_API_KEY}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    fields: {
+      Name: name,
+      Email: email,
+      "Primary Role": primaryRole,
+      "Secondary Craft": secondaryCraft,
+      "CC Email": ccEmail,
+      "How did you hear about us?": referral,
+      Source: "Website"
+    }
+  })
+});
 
     return {
       statusCode: 200,
