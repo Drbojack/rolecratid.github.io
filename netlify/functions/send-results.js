@@ -527,7 +527,7 @@ const html = `
 });
 
 try {
-  await fetch(AIRTABLE_URL, {
+ const airtableRes = await fetch(AIRTABLE_URL, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${process.env.AIRTABLE_API_KEY}`,
