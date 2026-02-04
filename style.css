@@ -383,4 +383,29 @@ html, body {
 }
 
 
+.start-screen {
+  text-align: center;
+}
+
+.start-screen .steps {
+  max-width: 520px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+.start-screen p {
+  margin-bottom: 14px;
+}
+
+.start-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.returning-msg {
+  margin-bottom: 18px;
+  font-style: italic;
+}
 
