@@ -2,6 +2,7 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const AIRTABLE_URL = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${encodeURIComponent(process.env.AIRTABLE_TABLE_NAME)}`;
 
 function escapeHtml(str = "") {
   return String(str)
@@ -525,23 +526,31 @@ const html = `
   html
 });
 
-await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`, {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.AIRTABLE_API_KEY}`,
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    fields: {
-      Email: email,
-      "Primary Role": primaryRole,
-      "Secondary Craft": secondaryCraft,
-      "CC Email": ccEmail,
-      "How did you hear about us?": referral,
-      Source: "Website"
-    }
-  })
-});
+try {
+  await fetch(AIRTABLE_URL, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.AIRTABLE_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      records: [
+        {
+          fields: 
+            email: email,
+            "cc Email": ccEmail || "",
+            "primary role": primaryRole,
+            "secondary craft": secondaryCraft,
+            "source": referralSource || "",
+          }
+        }
+      ]
+    })
+  });
+} catch (err) {
+  console.error("Airtable logging failed:", err);
+}
+
 
     return {
       statusCode: 200,
