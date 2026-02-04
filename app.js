@@ -623,6 +623,8 @@ function showResults() {
   </p>
 `;
 
+	el('resultsBox').innerHTML = resultsHtml;
+	
 const emailSection = document.getElementById('emailSection');
 const emailMount = document.getElementById('emailMount');
 
