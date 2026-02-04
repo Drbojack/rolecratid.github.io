@@ -361,123 +361,172 @@ const sdpHtml = `
 
 
 
-  const html = `
-      <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.45; color: #111;">
-        <p>Hello</p>
+const html = `
+  <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #111;">
 
-        <p>
-          Thank you for completing the RoleCraft ID personality test. Based on your responses, your RoleCraft Identity (RCID) is:
-          <br/>
-          <strong>${escapeHtml(primaryRole)} / ${escapeHtml(secondaryCraft)}</strong>
-        </p>
+    <p>Hello,</p>
 
-        <p>
-          This reflects how you are intrinsically motivated to contribute and how that contribution tends to show up in action.
-          Below is a brief overview of each part of your profile, with links if you’d like to explore further.
-        </p>
+    <p>
+      Thank you for completing the RoleCraftID personality test. Based on your responses,
+      your RoleCraft Identity (RCID) is:
+    </p>
 
-        <hr/>
+    <!-- RCID headline -->
+    <p style="font-size: 20px; font-weight: bold; margin: 8px 0 18px;">
+      <a href="${ROLE_CONTENT[primaryRole].url}"
+         target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        ${escapeHtml(primaryRole)}
+      </a>
+      /
+      <a href="${CRAFT_CONTENT[secondaryCraft].url}"
+         target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        ${escapeHtml(secondaryCraft)}
+      </a>
+    </p>
 
-        <h3>Your Primary Role: ${escapeHtml(primaryRole)}</h3>
+    <p>
+      This reflects how intrinsically motivated you are to contribute and how that
+      contribution manifests in action. Below is a brief overview of each section
+      of your profile, with links to explore further.
+    </p>
 
-        <p>Your Primary Role represents your core intrinsic contribution pattern.</p>
+    <hr style="margin:24px 0;" />
 
-        <p>
-          People who express the ${escapeHtml(primaryRole)} strongly are often recognized for the way they consistently influence outcomes,
-          especially under pressure or ambiguity.
-        </p>
+    <!-- Primary Role -->
+    <h3 style="font-size: 18px; margin-bottom: 6px;">
+      Your Primary Role:
+      <a href="${ROLE_CONTENT[primaryRole].url}"
+         target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        ${escapeHtml(primaryRole)}
+      </a>
+    </h3>
 
-        <ul>
-          ${asList(ROLE_CONTENT[primaryRole])}
-        </ul>
+    <p>Your Primary Role represents your core intrinsic contribution pattern.</p>
 
-        <p><strong>Here is how you scored across all Roles:</strong></p>
-        <ol>
-          ${formatScoresRole(normalizedRoleScores)}
-        </ol>
-        
-        <hr/>
+    <p>
+      People who express the ${escapeHtml(primaryRole)} strongly are often recognized
+      for the way they consistently influence outcomes, especially under pressure
+      or ambiguity.
+    </p>
 
-        <h3>Your Secondary Craft: ${escapeHtml(secondaryCraft)}</h3>
+    ${asList(ROLE_CONTENT[primaryRole].bullets)}
 
-        <p>Your Craft describes how your Role tends to express itself in practice.</p>
+    <p><strong>Here is how you scored across all Roles (out of 10):</strong></p>
+    <ol>
+      ${formatScoresRole(normalizedRoleScores)}
+    </ol>
 
-        <p>
-          The ${escapeHtml(secondaryCraft)} Craft shapes your default way of acting, responding, and engaging once something matters to you.
-        </p>
+    <hr style="margin:24px 0;" />
 
-        <ul>
-          ${asList(CRAFT_CONTENT[secondaryCraft])}
-        </ul>
+    <!-- Secondary Craft -->
+    <h3 style="font-size: 18px; margin-bottom: 6px;">
+      Your Secondary Craft:
+      <a href="${CRAFT_CONTENT[secondaryCraft].url}"
+         target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        ${escapeHtml(secondaryCraft)}
+      </a>
+    </h3>
 
-        <p><strong>Here is how you scored across all Crafts:</strong></p>
-        <ol>
-          ${formatScoresCraft(normalizedCraftScores)}
-        </ol>
+    <p>Your Craft describes how your Role tends to express itself in practice.</p>
 
-        <hr/>
+    <p>
+      The ${escapeHtml(secondaryCraft)} Craft shapes your default way of acting,
+      responding, and engaging once something matters to you.
+    </p>
 
-        <h3>Your Self-Determination Priorities (SDP)</h3>
+    ${asList(CRAFT_CONTENT[secondaryCraft].bullets)}
 
-        <p>
-          Your motivation is sustained by a specific mix of psychological drivers.
-          Based on your assessment, your priorities rank as follows:
-        </p>
-<ol>
-  ${sdp.map(item => {
-    const [title, description] = item.label.split(" – ");
+    <p><strong>Here is how you scored across all Crafts (out of 10):</strong></p>
+    <ol>
+      ${formatScoresCraft(normalizedCraftScores)}
+    </ol>
 
-    return `
-      <li>
-        <a href="${item.url}" target="_blank">
-          ${escapeHtml(title)}
-        </a>
-        ${description ? ` – ${escapeHtml(description)}` : ""}
-      </li>
-    `;
-  }).join("")}
-</ol>
+    <hr style="margin:24px 0;" />
 
-     <p>
-          These priorities don’t describe what you value abstractly—they describe what keeps you intrinsically motivated over time.
-        </p>
+    <!-- SDP -->
+    <h3>Your Self-Determination Priorities (SDP)</h3>
 
-        <p>
-         Continue exploring your <a href="${resultsOverviewUrl}" target="_blank">SDP Profile</a>
-        </p>
+    <p>
+      Your motivation is sustained by a specific mix of psychological drivers.
+      Based on your assessment, your priorities rank as follows:
+    </p>
 
-        <hr/>
+    <ol>
+      ${sdp.map(item => {
+        const [title, description] = item.label.split(" – ");
+        return `
+          <li>
+            <a href="${item.url}" target="_blank"
+               style="color:#0b5cff; text-decoration: underline;">
+              ${escapeHtml(title)}
+            </a>
+            ${description ? ` – ${escapeHtml(description)}` : ""}
+          </li>
+        `;
+      }).join("")}
+    </ol>
 
-        <h3>What to Do Next</h3>
+    <p>
+      These priorities don’t describe what you value abstractly—they describe what
+      keeps you intrinsically motivated over time.
+    </p>
 
-        <p>
-          Your RoleCraftID is not a label or limitation. It’s a tool for awareness and choice—one that becomes more useful as you apply it to real decisions, roles, and challenges.
-        </p>
+    <p>
+      Continue exploring your
+      <a href="${resultsOverviewUrl}" target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        RoleCraftID results here →
+      </a>
+    </p>
 
-        <p>On the RoleCraft site, you’ll find:</p>
-        <ul>
-          <li>Deeper explanations of Roles and Crafts</li>
-          <li>Examples from real and fictional profiles</li>
-          <li>Campaigns and scenarios where your RCID can be applied</li>
-        </ul>
+    <hr style="margin:24px 0;" />
 
-        <p>
-         Continue exploring your <a href="${resultsOverviewUrl}" target="_blank">RoleCraftID</a>
+    <!-- What to do next -->
+    <h3>What to Do Next</h3>
 
-        </p>
+    <p>
+      Your RoleCraftID is not a label or limitation. It’s a tool for awareness and
+      choice—one that becomes more useful as you apply it to real decisions,
+      roles, and challenges.
+    </p>
 
-        <p>
-          Thank you for taking the assessment. We’re glad you’re here.
-        </p>
+    <p>
+      <a href="${resultsOverviewUrl}" target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        Continue exploring your RoleCraftID results here →
+      </a>
+    </p>
 
-        <p>
-          <strong>The RoleCraftID Team</strong><br/>
-          <a href="https://www.rolecraftid.com" target="_blank" rel="noopener noreferrer">RoleCraftID.com</a>
-        </p>
+    <p>
+      When you’re ready, if the assessment made sense, the manual is where your
+      results move from theory to practice.
+    </p>
 
-        <p><em>P.S. Feel free to share this with your friends and colleagues.</em></p>
-      </div>
-    `;
+    <p>
+      <a href="https://www.amazon.ca/dp/B0GL7RPMD5?tag=calinktagbk-20&th=1&psc=1&geniuslink=true"
+         target="_blank"
+         style="color:#0b5cff; text-decoration: underline;">
+        Order the manual here →
+      </a>
+    </p>
+
+    <p>
+      Thanks, and welcome again to the world of RoleCraftID.
+    </p>
+
+    <p>
+      <strong>The RoleCraftID Team</strong><br/>
+    </p>
+
+    <p><em>P.S. Feel free to share this with your friends and colleagues.</em></p>
+
+  </div>
+`;
+
 
    await sgMail.send({
       to: email,
