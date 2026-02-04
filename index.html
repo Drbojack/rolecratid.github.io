@@ -42,24 +42,41 @@
 
 
    <div id="emailSection" style="display:none;">
+
   <label class="label">
-    Email address
-    <input
-      id="emailInput"
-      class="input"
-      type="email"
-      placeholder="you@example.com"
-      autocomplete="email"
-    />
+    Your email
+    <input id="emailInput"
+           class="input"
+           type="email"
+           placeholder="you@example.com"
+           autocomplete="email" />
+  </label>
+
+  <label class="label">
+    Send a copy to (optional)
+    <input id="ccEmailInput"
+           class="input"
+           type="email"
+           placeholder="coach@example.com" />
+  </label>
+
+  <label class="label">
+    How did you hear about us? (optional)
+    <input id="referralInput"
+           class="input"
+           type="text"
+           placeholder="Friend, coach, podcast, etc." />
   </label>
 
   <div class="row">
-    <button id="sendEmail" class="btn btn-primary" type="button">
+    <button id="sendEmail"
+            class="btn btn-primary"
+            type="button">
       Send email
     </button>
   </div>
 
-  <p id="emailStatus" class="muted" style="margin-top:10px;"></p>
+  <p id="emailStatus" class="muted"></p>
 </div>
 
 
