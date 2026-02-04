@@ -575,51 +575,52 @@ function showResults() {
   });
 
 
-  el('resultsBox').innerHTML = `
-  <div class="results-inner">
-
-    <h2>Your RoleCraftID is:</h2>
+ const resultsHtml = `
+  <h2>Your RoleCraftID is:</h2>
 
   <p>
-    <strong>Primary:</strong>
-    <a href="https://www.rolecraftid.com/${primaryRoles[0].toLowerCase().replace(/\s+/g, '-')}"
+    <strong>Primary Role:</strong>
+    <a href="https://www.rolecraftid.com/${primaryRoles[0]
+      .toLowerCase()
+      .replace(/\\s+/g, '-')}"
        target="_blank">
       ${primaryRoles.join(' & ')}
     </a>
   </p>
 
   <p>
-    <strong>Secondary:</strong>
-    <a href="https://www.rolecraftid.com/${secondaryCrafts[0].toLowerCase().replace(/\s+/g, '-')}"
+    <strong>Secondary Craft:</strong>
+    <a href="https://www.rolecraftid.com/${secondaryCrafts[0]
+      .toLowerCase()
+      .replace(/\\s+/g, '-')}"
        target="_blank">
       ${secondaryCrafts.join(' & ')}
     </a>
   </p>
 
   <p class="muted">
-    Visit our
+    Visit the
     <a href="https://www.rolecraftid.com/results-overview" target="_blank">
       results page
     </a>
     to explore more.
   </p>
 
-    <h3>Get Your Full RoleCraftID Report</h3>
+  <h3>Get Your Full RoleCraftID Report</h3>
 
-    <p class="results-description">
-      Enter your email to receive your complete RoleCraftID report, including
-      detailed role insights, development guidance, and application examples.
-    </p>
+  <p class="results-description">
+    Enter your email to receive your complete RoleCraftID report, including
+    detailed results insights, development guidance, and application examples.
+    You can also CC a coach or referring associate.
+  </p>
 
   <div id="emailMount"></div>
 
-    <p class="results-consent">
-      By requesting your report, you agree to receive follow-up communications
-      from RoleCraftID related to your results, updates, and related resources.
-      You can unsubscribe at any time.
-    </p>
-
-  </div>
+  <p class="results-consent">
+    By requesting your report, you agree to receive follow-up communications
+    from RoleCraftID related to your results, updates, and related resources.
+    You can unsubscribe at any time.
+  </p>
 `;
 
 const emailSection = document.getElementById('emailSection');
