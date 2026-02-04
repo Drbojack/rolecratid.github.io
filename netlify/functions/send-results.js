@@ -2,6 +2,8 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+const AIRTABLE_URL = process.env.AIRTABLE_URL;
+
 function escapeHtml(str = "") {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -524,7 +526,7 @@ const html = `
   html
 });
 
-const AIRTABLE_URL = process.env.AIRTABLE_URL;
+console.log("Airtable URL:", AIRTABLE_URL);
 
     
 try {
