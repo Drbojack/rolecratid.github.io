@@ -597,15 +597,20 @@ function showResults() {
  const resultsHtml = `
   <h2>Your RoleCraftID is:</h2>
 
-  <p>
-    <strong>Primary Role:</strong>
- <a href="${ROLE_URLS[primaryRoles[0]]}" target="_blank">
-  </p>
+<p>
+  <strong>Primary Role:</strong>
+  <a href="${ROLE_URLS[primaryRoles[0]]}" target="_blank">
+    ${primaryRoles.join(' & ')}
+  </a>
+</p>
 
-  <p>
-    <strong>Secondary Craft:</strong>
-    <a href="${CRAFT_URLS[secondaryCrafts[0]]}" target="_blank">
-  </p>
+<p>
+  <strong>Secondary Craft:</strong>
+  <a href="${CRAFT_URLS[secondaryCrafts[0]]}" target="_blank">
+    ${secondaryCrafts.join(' & ')}
+  </a>
+</p>
+
 
   <p class="muted">
     Visit the
