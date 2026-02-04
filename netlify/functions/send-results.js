@@ -2,7 +2,7 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const AIRTABLE_URL = process.env.AIRTABLE_URL;
+const AIRTABLE_URL = process.env.AIRTABLE_BASE_ID;
 
 function escapeHtml(str = "") {
   return String(str)
