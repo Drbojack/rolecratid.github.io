@@ -303,23 +303,55 @@ function renderStart(){
     : '';
 
   el('card').innerHTML = `
-    <div class="q-block">
-      <h3 class="q-subtitle">Welcome</h3>
-      ${hasProgress ? `<p class="muted" style="margin-top:10px; line-height:1.6;"><em>${returningMsg}</em></p>` : ``}
-      <p class="muted" style="margin-top:10px; line-height:1.7;">
-        This assessment is designed to surface patterns, not test knowledge or performance.
-        Answer naturally, not aspirationally.
-      </p>
-      <p class="muted" style="margin-top:10px; line-height:1.7;">
-        You’ll answer about <strong>${total}</strong> questions.
-      </p>
+  <div class="q-block">
 
-      <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
-        <button id="startBtn" class="btn btn-primary" type="button">${hasProgress ? (state.completed ? "View results" : "Resume") : "Begin"}</button>
-        ${hasProgress ? `<button id="restartBtn" class="btn btn-secondary" type="button">Start over</button>` : ``}
-      </div>
+    <h3 class="q-subtitle">Welcome</h3>
+
+    ${hasProgress ? `
+      <p class="muted" style="margin-top:10px; line-height:1.6;">
+        <em>${returningMsg}</em>
+      </p>
+    ` : ``}
+
+    <div style="margin-top:16px; line-height:1.7;">
+
+      <p><strong>STEP 1: Complete the Test</strong><br/>
+      Be yourself and answer naturally, not aspirationally.</p>
+
+      <p><strong>STEP 2: View Your Profile</strong><br/>
+      Get immediate results and a full report by email.</p>
+
+      <p><strong>STEP 3: Unlock Your Ancient Archetype</strong><br/>
+      Explore resources online and order the manual.</p>
+
     </div>
-  `;
+
+    <p class="muted" style="margin-top:16px;">
+      <strong>TIME ESTIMATE:</strong> 20 min. for ${total} questions<br/>
+      Your progress and results will be saved if you return later.
+    </p>
+
+    <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+      <button
+        id="startBtn"
+        class="btn btn-primary"
+        type="button">
+        ${hasProgress ? (state.completed ? "View results" : "Resume") : "Begin"}
+      </button>
+
+      ${hasProgress ? `
+        <button
+          id="restartBtn"
+          class="btn btn-secondary"
+          type="button">
+          Start over
+        </button>
+      ` : ``}
+    </div>
+
+  </div>
+`;
+
 
   document.getElementById('startBtn').onclick = () => {
     if (state.completed) {
