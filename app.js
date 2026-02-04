@@ -18,6 +18,25 @@ const ROLE_IMAGES = {
 };
 
 
+const ROLE_URLS = {
+  "Visionary Prophet": "https://www.rolecraftid.com/prophet",
+  "Humble Servant": "https://www.rolecraftid.com/servant",
+  "Learned Teacher": "https://www.rolecraftid.com/teacher",
+  "Visionary Exhorter": "https://www.rolecraftid.com/exhorter",
+  "Trusted Steward": "https://www.rolecraftid.com/steward",
+  "Organized Leader": "https://www.rolecraftid.com/leader",
+  "Mindful Mercy": "https://www.rolecraftid.com/mercy"
+};
+
+const CRAFT_URLS = {
+  "Activator": "https://www.rolecraftid.com/activator",
+  "Perceiver": "https://www.rolecraftid.com/perceiver",
+  "Engager": "https://www.rolecraftid.com/engager",
+  "Safekeeper": "https://www.rolecraftid.com/safekeeper",
+  "Trainer": "https://www.rolecraftid.com/trainer"
+};
+
+
 /** ---------- Seeded RNG (stable random order across refresh/return) ---------- **/
 function mulberry32(seed){
   let t = seed >>> 0;
@@ -580,22 +599,12 @@ function showResults() {
 
   <p>
     <strong>Primary Role:</strong>
-    <a href="https://www.rolecraftid.com/${primaryRoles[0]
-      .toLowerCase()
-      .replace(/\\s+/g, '-')}"
-       target="_blank">
-      ${primaryRoles.join(' & ')}
-    </a>
+ <a href="${ROLE_URLS[primaryRoles[0]]}" target="_blank">
   </p>
 
   <p>
     <strong>Secondary Craft:</strong>
-    <a href="https://www.rolecraftid.com/${secondaryCrafts[0]
-      .toLowerCase()
-      .replace(/\\s+/g, '-')}"
-       target="_blank">
-      ${secondaryCrafts.join(' & ')}
-    </a>
+    <a href="${CRAFT_URLS[secondaryCrafts[0]]}" target="_blank">
   </p>
 
   <p class="muted">
