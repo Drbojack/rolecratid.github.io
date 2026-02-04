@@ -412,8 +412,6 @@ const html = `
       or ambiguity.
     </p>
 
-    ${asList(ROLE_CONTENT[primaryRole].bullets)}
-
     <p><strong>Here is how you scored across all Roles (out of 10):</strong></p>
     <ol>
       ${formatScoresRole(normalizedRoleScores)}
@@ -437,8 +435,6 @@ const html = `
       The ${escapeHtml(secondaryCraft)} Craft shapes your default way of acting,
       responding, and engaging once something matters to you.
     </p>
-
-    ${asList(CRAFT_CONTENT[secondaryCraft].bullets)}
 
     <p><strong>Here is how you scored across all Crafts (out of 10):</strong></p>
     <ol>
@@ -473,14 +469,6 @@ const html = `
     <p>
       These priorities don’t describe what you value abstractly—they describe what
       keeps you intrinsically motivated over time.
-    </p>
-
-    <p>
-      Continue exploring your
-      <a href="${resultsOverviewUrl}" target="_blank"
-         style="color:#0b5cff; text-decoration: underline;">
-        RoleCraftID results here →
-      </a>
     </p>
 
     <hr style="margin:24px 0;" />
