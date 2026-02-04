@@ -334,7 +334,7 @@ function renderStart(){
     <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
       <button
         id="startBtn"
-        class="btn btn-primary"
+        class="btn btn-secondary"
         type="button">
         ${hasProgress ? (state.completed ? "View results" : "Resume") : "Begin"}
       </button>
