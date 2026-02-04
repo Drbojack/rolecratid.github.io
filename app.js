@@ -468,7 +468,9 @@ el('sendEmail').addEventListener('click', async (e) => {
     el('emailStatus').textContent = "Please enter an email address.";
     return;
   }
-
+const ccEmail = el('ccInput')?.value.trim() || "";
+const referral = el('referralInput')?.value.trim() || "";
+	
   el('sendEmail').disabled = true;
   el('emailStatus').textContent = "Sending…";
 
@@ -486,6 +488,8 @@ el('sendEmail').addEventListener('click', async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       email,
+  ccEmail,
+  referral,
       primaryRole: payload.primaryRoles[0],
       secondaryCraft: payload.secondaryCrafts?.[0],
       roleScores: payload.roleScores || {},
