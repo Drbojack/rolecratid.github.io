@@ -2,7 +2,6 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const fetch = require("node-fetch");
 
 function escapeHtml(str = "") {
   return String(str)
