@@ -537,20 +537,23 @@ try {
       records: [
         {
           fields: {
-            Email: email,
-            "CC Email": ccEmail || "",
-            "Primary Role": primaryRole,
-            "Secondary Craft": secondaryCraft,
-            Source: referralSource || ""
+            email: email,
+            "cc email": ccEmail || "",
+            "primary role": primaryRole,
+            "secondary craft": secondaryCraft,
+            source: referralSource || ""
           }
         }
       ]
     })
   });
+const text = await airtableRes.text();
+  console.log("Airtable status:", airtableRes.status);
+  console.log("Airtable response:", text);
+
 } catch (err) {
   console.error("Airtable logging failed:", err);
 }
-
 
 
     return {
