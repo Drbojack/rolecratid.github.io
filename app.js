@@ -302,48 +302,40 @@ function renderStart(){
         : `It looks like you've been here before. Would you like to return to where you were, or start over?`)
     : '';
 
-  el('card').innerHTML = `
-  <div class="q-block">
-
-    <h3 class="q-subtitle">Welcome</h3>
+el('card').innerHTML = `
+  <div class="q-block start-screen">
 
     ${hasProgress ? `
-      <p class="muted" style="margin-top:10px; line-height:1.6;">
+      <p class="muted returning-msg">
         <em>${returningMsg}</em>
       </p>
     ` : ``}
 
-    <div style="margin-top:16px; line-height:1.7;">
+    ${!hasProgress ? `
+      <div class="steps">
+        <p><strong>STEP 1: Complete the Test</strong><br/>
+        Be yourself and answer naturally, not aspirationally.</p>
 
-      <p><strong>STEP 1: Complete the Test</strong><br/>
-      Be yourself and answer naturally, not aspirationally.</p>
+        <p><strong>STEP 2: View Your Profile</strong><br/>
+        Get immediate results and a full report by email.</p>
 
-      <p><strong>STEP 2: View Your Profile</strong><br/>
-      Get immediate results and a full report by email.</p>
+        <p><strong>STEP 3: Unlock Your Ancient Archetype</strong><br/>
+        Explore resources online and order the manual.</p>
 
-      <p><strong>STEP 3: Unlock Your Ancient Archetype</strong><br/>
-      Explore resources online and order the manual.</p>
+        <p class="muted time-estimate">
+          <strong>TIME ESTIMATE:</strong> 20 min. for ${total} questions<br/>
+          Your progress and results will be saved if you return later.
+        </p>
+      </div>
+    ` : ``}
 
-    </div>
-
-    <p class="muted" style="margin-top:16px;">
-      <strong>TIME ESTIMATE:</strong> 20 min. for ${total} questions<br/>
-      Your progress and results will be saved if you return later.
-    </p>
-
-    <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button
-        id="startBtn"
-        class="btn btn-secondary"
-        type="button">
+    <div class="start-actions">
+      <button id="startBtn" class="btn btn-secondary" type="button">
         ${hasProgress ? (state.completed ? "View results" : "Resume") : "Begin"}
       </button>
 
       ${hasProgress ? `
-        <button
-          id="restartBtn"
-          class="btn btn-secondary"
-          type="button">
+        <button id="restartBtn" class="btn btn-secondary" type="button">
           Start over
         </button>
       ` : ``}
@@ -351,6 +343,7 @@ function renderStart(){
 
   </div>
 `;
+
 
 
   document.getElementById('startBtn').onclick = () => {
