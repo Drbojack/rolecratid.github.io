@@ -354,16 +354,19 @@ html, body {
 }
 
 
-/* Text styling */
 .results-description {
-  color: var(--muted);
-  line-height: 1.6;
-  margin: 12px 0;
+  max-width: 720px;
+  margin: 10px 0 18px;
 }
 
-.results-rcid {
-  font-size: 18px;
-  margin: 8px 0 16px;
+.results-consent {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+
+.results-rcid p {
+  margin: 6px 0;
 }
 
 #emailSection .label {
