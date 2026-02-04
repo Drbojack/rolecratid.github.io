@@ -463,16 +463,19 @@ el('sendEmail').addEventListener('click', async (e) => {
   e.preventDefault();
   e.stopPropagation();
 
-  const email = el('emailInput').value.trim();
-  if (!email){
-    el('emailStatus').textContent = "Please enter an email address.";
-    return;
-  }
-const ccEmail = el('ccInput')?.value.trim() || "";
-const referral = el('referralInput')?.value.trim() || "";
-	
-  el('sendEmail').disabled = true;
-  el('emailStatus').textContent = "Sending…";
+ const email = el('emailInput')?.value?.trim();
+if (!email) {
+  el('emailStatus').textContent = "Please enter an email address.";
+  return;
+}
+
+const ccEmail = el('ccInput')?.value?.trim() || "";
+const referral = el('referralInput')?.value?.trim() || "";
+
+	console.log({ email, ccEmail, referral });
+
+el('sendEmail').disabled = true;
+el('emailStatus').textContent = "Sending…";
 
   try {
     const payload = JSON.parse(el('resultsBox').dataset.payload || "{}");
