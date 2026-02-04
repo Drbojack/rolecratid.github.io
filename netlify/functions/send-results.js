@@ -536,12 +536,12 @@ try {
     body: JSON.stringify({
       records: [
         {
-          fields: 
-            email: email,
-            "cc Email": ccEmail || "",
-            "primary role": primaryRole,
-            "secondary craft": secondaryCraft,
-            "source": referralSource || "",
+          fields: {
+            Email: email,
+            "CC Email": ccEmail || "",
+            "Primary Role": primaryRole,
+            "Secondary Craft": secondaryCraft,
+            Source: referralSource || ""
           }
         }
       ]
@@ -550,6 +550,7 @@ try {
 } catch (err) {
   console.error("Airtable logging failed:", err);
 }
+
 
 
     return {
