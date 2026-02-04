@@ -533,7 +533,6 @@ await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${proce
   },
   body: JSON.stringify({
     fields: {
-      Name: name,
       Email: email,
       "Primary Role": primaryRole,
       "Secondary Craft": secondaryCraft,
