@@ -323,7 +323,7 @@ el('card').innerHTML = `
         Explore resources online and order the manual.</p>
 
         <p class="time-estimate">
-          <strong>TIME ESTIMATE:</strong> 20 min. for ${total} questions<br/>
+          <strong>TIME ESTIMATE:20 min. for ${total} questions</strong><br/>
           Your progress and results will be saved if you return later.
         </p>
       </div>
