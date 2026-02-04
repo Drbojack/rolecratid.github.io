@@ -322,7 +322,7 @@ el('card').innerHTML = `
         <p><strong>STEP 3: Unlock Your Ancient Archetype</strong><br/>
         Explore resources online and order the manual.</p>
 
-        <p class="muted time-estimate">
+        <p class="time-estimate">
           <strong>TIME ESTIMATE:</strong> 20 min. for ${total} questions<br/>
           Your progress and results will be saved if you return later.
         </p>
