@@ -540,11 +540,11 @@ try {
       records: [
         {
           fields: {
-            email: email,
+            "email": email,
             "cc email": ccEmail || "",
             "primary role": primaryRole,
             "secondary craft": secondaryCraft,
-            source: referralSource || ""
+            "source": referralSource || ""
           }
         }
       ]
