@@ -260,7 +260,7 @@ exports.handler = async function (event) {
     const {
       email,
       ccEmail = "",
-      referralSource = "",
+      referral = "",
       primaryRole,
       secondaryCraft,
       roleScores = {},
@@ -544,7 +544,7 @@ try {
             "cc email": ccEmail || "",
             "primary role": primaryRole,
             "secondary craft": secondaryCraft,
-            "source": referralSource || ""
+            "source": referral || ""
           }
         }
       ]
