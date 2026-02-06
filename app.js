@@ -513,7 +513,7 @@ el('emailStatus').textContent = "Sending…";
   } catch (err){
     console.error("Email send error:", err);
     el('emailStatus').textContent =
-      "We’re sending your report. If it doesn’t arrive in a few minutes, please try again, or contact us if the issue persists.";
+      "We’re having trouble sending your report. If it doesn’t arrive in a few minutes, please try again, or contact us if the issue persists.";
   } finally {
     el('sendEmail').disabled = false;
   }
