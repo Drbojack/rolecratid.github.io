@@ -54,8 +54,8 @@ const normalizeScores = (scores = {}, maxRaw) => {
    ====================== */
 
 const ROLE_CONTENT = {
-  "Visionary Prophet": {
-    title: "The Visionary Prophet",
+  "Insightful Prophet": {
+    title: "The Insightful Prophet",
     bullets: [
       "Detect truth and principle misalignment early",
       "Identify and name uncomfortable realities",
