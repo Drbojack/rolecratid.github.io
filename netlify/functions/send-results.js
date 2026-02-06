@@ -458,7 +458,7 @@ const html = `
     const [title, description] = item.label.split(" – ");
     return `
       <li>
-        <strong>Priority ${index + 1}:</strong>
+   Priority ${index + 1}:
         <a href="${item.url}" target="_blank"
            style="color:#0b5cff; text-decoration: underline;">
           ${escapeHtml(title)}
