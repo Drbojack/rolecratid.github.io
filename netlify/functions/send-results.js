@@ -300,7 +300,7 @@ const normalizedCraftScores = normalizeScores(craftScores, CRAFT_RAW_MAX);
     .map(([name, score]) => {
   const url = ROLE_CONTENT[name]?.url;
   return `<li>
-    <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
+    <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score}
   </li>`;
 }).join("");
     
@@ -309,7 +309,7 @@ const formatScoresCraft = scores =>
     .map(([name, score]) => {
   const url = CRAFT_CONTENT[name]?.url;
   return `<li>
-    <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} / 10
+    <a href="${url}" target="_blank">${escapeHtml(name)}</a>: ${score} 
   </li>`;
 }).join("");
 const SDP_CONTENT = {
@@ -367,7 +367,7 @@ const sdpHtml = `
 
 const html = `
   <div style="font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #111;">
-
+<p><strong>RoleCraftID assessment results for ${escapeHtml(email)}.</strong></p>
   <p>
       Thank you for completing the RoleCraftID personality test. Based on your responses,
       your RoleCraft Identity (RCID) is:
@@ -453,20 +453,21 @@ const html = `
       Based on your assessment, your priorities rank as follows:
     </p>
 
-    <ol>
-      ${sdp.map(item => {
-        const [title, description] = item.label.split(" – ");
-        return `
-          <li>
-            <a href="${item.url}" target="_blank"
-               style="color:#0b5cff; text-decoration: underline;">
-              ${escapeHtml(title)}
-            </a>
-            ${description ? ` – ${escapeHtml(description)}` : ""}
-          </li>
-        `;
-      }).join("")}
-    </ol>
+<ul>
+  ${sdp.map((item, index) => {
+    const [title, description] = item.label.split(" – ");
+    return `
+      <li>
+        <strong>Priority ${index + 1}:</strong>
+        <a href="${item.url}" target="_blank"
+           style="color:#0b5cff; text-decoration: underline;">
+          ${escapeHtml(title)}
+        </a>
+        ${description ? ` – ${escapeHtml(description)}` : ""}
+      </li>
+    `;
+  }).join("")}
+</ul>
 
     <p>
       These priorities don’t describe what you value abstractly—they describe what
@@ -522,7 +523,7 @@ const html = `
   to: email,
   cc: ccEmail || undefined,
   from: "hello@rolecraftid.com",
-  subject: "Your RoleCraftID Results",
+ subject: `RoleCraftID results for ${email}`,
   html
 });
 
