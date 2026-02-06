@@ -19,7 +19,7 @@ const ROLE_IMAGES = {
 
 
 const ROLE_URLS = {
-  "Visionary Prophet": "https://www.rolecraftid.com/prophet",
+  "Insightful Prophet": "https://www.rolecraftid.com/prophet",
   "Humble Servant": "https://www.rolecraftid.com/servant",
   "Learned Teacher": "https://www.rolecraftid.com/teacher",
   "Visionary Exhorter": "https://www.rolecraftid.com/exhorter",
